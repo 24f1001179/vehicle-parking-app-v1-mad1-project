@@ -7,17 +7,17 @@ class User(db.Model) :
     lastName = db.Column(db.String)
     age = db.Column(db.Integer)
     addressId = db.Column(db.Integer, db.ForeignKey("address.id"))
-    email = db.Column(db.String)
-    password = db.Column(db.String)
-    address = db.relationship("Address", backref = "user")
-    reservedParkingSpots = db.relationship("ReservedParkingSpot", backref = "user")
+    email = db.Column(db.String, unique = True)
+    password = db.Column(db.String, unique = True)
+    address = db.relationship("Address")
+    reservedParkingSpots = db.relationship("ReservedParkingSpot")
 
 class Address(db.Model) :
     __tablename__ = "address"
     id = db.Column(db.Integer, primary_key = True, autoincrement = True)
     streetName = db.Column(db.String)
-    streetType = db.Column(db.String)
     locality = db.Column(db.String)
+    subLocality = db.Column(db.String)
     city = db.Column(db.String)
     state = db.Column(db.String)
     pinCode = db.Column(db.String)

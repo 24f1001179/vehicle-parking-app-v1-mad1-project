@@ -7,15 +7,15 @@ class ParkingLot(db.Model) :
     noOfParkingSpots = db.Column(db.Integer)
     pricePerHr = db.Column(db.Integer)
     addressId = db.Column(db.Integer, db.ForeignKey("address.id"))
-    address = db.relationship("Address", backref = "parkingLot", uselist = False)
-    parkingSpots = db.relationship("ParkingSpot", backref = "parkingLot")
+    address = db.relationship("Address", uselist = False)
+    parkingSpots = db.relationship("ParkingSpot")
 
 class ParkingSpot(db.Model) :
     __tablename__ = "parkingspot"
     id = db.Column(db.Integer, primary_key = True, autoincrement = True)
     parkingLotId = db.Column(db.Integer, db.ForeignKey("parkinglot.id"))
     status = db.Column(db.Boolean)
-    reservedParkingSpots = db.relationship("ReservedParkingSpot", backref = "parkingSpot")
+    reservedParkingSpots = db.relationship("ReservedParkingSpot")
 
 
 class ReservedParkingSpot(db.Model) :

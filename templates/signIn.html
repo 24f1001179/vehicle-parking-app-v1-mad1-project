@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset = "UTF-8"/>
+        <meta name = "Author" content = "J S Karthik"/>
+        <meta name = "Description" content = "Sign In Page"/>
+        <title>
+            Sign In
+        </title>
+        <link rel = "stylesheet" href = "../static/bootstrap/css/bootstrap.min.css"/>
+        <link rel = "stylesheet" href = "../static/css/style.css"/>
+    </head>
+    <body>
+        <h1>
+            Sign In
+        </h1>
+        <form method = "POST" action = "/signIn">
+            <div>
+                <label>
+                    Email Id
+                </label>
+                <input type = "email" name = "email"/>
+            </div>
+            <div>
+                <label>
+                    Password
+                </label>
+                <input type = "password" name = "password"/>
+            </div>
+            <div>
+                <label>
+                    Type
+                </label>
+                <input type = "radio" name = "type" value = "user" id = "userradio"/>
+                <label for = "userradio">
+                    User
+                </label>
+                <input type = "radio" name = "type" value = "admin" id = "adminradio"/>
+                <label for = "adminradio">
+                    Admin
+                </label>
+            </div>
+            <div>
+                <input type = "submit" name = "submit" value = "Sign In"/>
+            </div>
+        </form>
+        <div>
+            <a href = "./signUp">
+                Sign Up
+            </a>
+        </div>
+    </body>
+</html>
