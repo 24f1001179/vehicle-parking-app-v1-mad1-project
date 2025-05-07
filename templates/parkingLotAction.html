@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset = "UTF-8"/>
+        <meta name = "Author" content = "J S Karthik"/>
+        <meta name = "Description" content = "Admin Dashbaord Page"/>
+        <title>
+            {{ action | title }}
+        </title>
+        <link rel = "stylesheet" href = "../static/bootstrap/css/bootstrap.min.css"/>
+        <link rel = "stylesheet" href = "../static/css/style.css"/>
+    </head>
+    <body>
+        <h1>
+            Parking Lot Details
+        </h1>
+        <form method = "POST" action = "/admin/dashboard/action">
+            <div>
+                <label>
+                    Landmark
+                </label>
+                <input type = "text" name = "la" value = "{{ pl.landmark }}"/>
+            </div>
+            <div>
+                <label>
+                    No. Of Parking Spots
+                </label>
+                <input type = "text" name = "nps" value = "{{ pl.noOfParkingSpots }}"/>
+            </div>
+            <div>
+                <label>
+                    Price Per Hour
+                </label>
+                <input type = "text" name = "pph" value = "{{ pl.pricePerHr }}"/>
+            </div>
+            <div>
+                <label>
+                    Street Name
+                </label>
+                <input type = "text" name = "n" value = "{{ pl.address.streetName }}"/>
+            </div>
+            <div>
+                <label>
+                    Locality
+                </label>
+                <input type = "text" name = "l" value = "{{ pl.address.locality }}"/>
+            </div>
+            <div>
+                <label>
+                    Sub-Locality
+                </label>
+                <input type = "text" name = "sl" value = "{{ pl.address.subLocality }}"/>
+            </div>
+            <div>
+                <label>
+                    City
+                </label>
+                <input type = "text" name = "c" value = "{{ pl.address.city }}"/>
+            </div>
+            <div>
+                <label>
+                    State
+                </label>
+                <input type = "text" name = "s" value = "{{ pl.address.state }}"/>
+            </div>
+            <div>
+                <label>
+                    Pin Code
+                </label>
+                <input type = "text" name = "p" value = "{{ pl.address.pinCode }}"/>
+            </div>
+            <div>
+                <input type = "submit" value = "{{ action | title}}"/>
+            </div>
+        </form>
+    </body>
+</html>

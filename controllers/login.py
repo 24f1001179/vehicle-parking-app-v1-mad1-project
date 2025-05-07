@@ -73,11 +73,11 @@ def additionalDetails() :
         pinCode = request.form["pinCode"]
         address = Address(streetName = streetName, locality = locality, subLocality = subLocality, city = city, state = state, pinCode = pinCode)
         user = User(email = email, password = password, firstName = firstName, lastName = lastName, age = age)
-        if insertRecord(address, user) :
+        if createUser(address, user) :
             return redirect(url_for("user.dashboard"))
         return redirect(url_for("general.signUp")) #if some error occured when inserting the record then redirect to the sign up page
 
-def insertRecord(address, user) :
+def createUser(address, user) :
     try :
         db.session.add(address)
         db.session.flush() #creates the autoincrement id but does not commit

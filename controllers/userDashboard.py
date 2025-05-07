@@ -1,6 +1,8 @@
 from flask import Flask, request, session
 from flask import render_template, url_for, redirect
 from controllers.bp import userbp 
+from dbInit import db
+from models.userInfo import User
 
 @userbp.before_request
 def restrict() :

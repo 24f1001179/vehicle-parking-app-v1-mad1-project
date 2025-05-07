@@ -9,8 +9,8 @@ class User(db.Model) :
     addressId = db.Column(db.Integer, db.ForeignKey("address.id"))
     email = db.Column(db.String, unique = True)
     password = db.Column(db.String, unique = True)
-    address = db.relationship("Address")
-    reservedParkingSpots = db.relationship("ReservedParkingSpot")
+    address = db.relationship("Address", backref = "users") #user and address is M - 1
+    reservedParkingSpots = db.relationship("ReservedParkingSpot", backref = "user") #user and reserved parking spot is 1 - M
 
 class Address(db.Model) :
     __tablename__ = "address"

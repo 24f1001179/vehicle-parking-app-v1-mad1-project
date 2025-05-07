@@ -14,5 +14,48 @@
         <h1>
             Admin Dashboard
         </h1>
+        <div>
+            <a href = "/admin/dashboard">
+                Parking Lots
+            </a>
+            <a href = "admin/dashboard/users">
+                Users
+            </a>
+            <a href = "admin/dashboard/profile">
+                Profile
+            </a>
+            <a href = "/signIn">
+                Logout
+            </a>
+        </div>
+        <div>
+            <h2>
+                Parking Lots
+            </h2>
+        </div>
+        <div>
+            <form method = "POST" action = "/admin/dashboard">
+                <button type = "submit" name = "action" value = "create">
+                    Add A Parking Lot
+                </button>
+            </form>
+        </div>
+        <div>
+            {% for parkingLot in parkingLots %}
+                <div>
+                    <form method = "POST" action = "/admin/dashboard">
+                        {{ parkingLot.noOfParkingSpots }} 
+                        {{ parkingLot.pricePerHr }}
+                        <input type = "hidden" name = "parkingLotId" value = "{{ parkingLot.id }}"/>
+                        <button type = "submit" name = "action" value = "edit">
+                            Edit 
+                        </button>
+                        <button type = "submit" name = "action" value = "delete">
+                            Delete 
+                        </button>
+                    </form>
+                </div>
+            {% endfor %}
+        </div>
     </body>
 </html>
