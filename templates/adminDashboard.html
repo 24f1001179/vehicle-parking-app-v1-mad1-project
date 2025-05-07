@@ -7,8 +7,8 @@
         <title>
             Dashboard
         </title>
-        <link rel = "stylesheet" href = "../static/bootstrap/css/bootstrap.min.css"/>
-        <link rel = "stylesheet" href = "../static/css/style.css"/>
+        <link rel = "stylesheet" href = "/static/bootstrap/css/bootstrap.min.css"/>
+        <link rel = "stylesheet" href = "/static/css/style.css"/>
     </head>
     <body>
         <h1>
@@ -18,11 +18,8 @@
             <a href = "/admin/dashboard">
                 Parking Lots
             </a>
-            <a href = "admin/dashboard/users">
+            <a href = "/admin/dashboard/users">
                 Users
-            </a>
-            <a href = "admin/dashboard/profile">
-                Profile
             </a>
             <a href = "/signIn">
                 Logout
@@ -52,6 +49,15 @@
                         </button>
                         <button type = "submit" name = "action" value = "delete">
                             Delete 
+                        </button>
+                        <button type = "submit" name = "action" value = "details">
+                            Details
+                        </button>
+                        <button type = "submit" name = "action" value = "add1">
+                            Add One Parking Spot
+                        </button>
+                        <button type = "submit" name = "action" value = "delete1">
+                            Delete One Parking Spot
                         </button>
                     </form>
                 </div>

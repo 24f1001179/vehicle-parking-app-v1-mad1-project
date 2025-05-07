@@ -7,8 +7,8 @@
         <title>
             {{ action | title }}
         </title>
-        <link rel = "stylesheet" href = "../static/bootstrap/css/bootstrap.min.css"/>
-        <link rel = "stylesheet" href = "../static/css/style.css"/>
+        <link rel = "stylesheet" href = "/static/bootstrap/css/bootstrap.min.css"/>
+        <link rel = "stylesheet" href = "/static/css/style.css"/>
     </head>
     <body>
         <h1>
@@ -19,58 +19,68 @@
                 <label>
                     Landmark
                 </label>
-                <input type = "text" name = "la" value = "{{ pl.landmark }}"/>
+                <input type = "text" name = "la" value = "{{ pl.landmark }}" {% if action == "details" %} readonly {% endif %}/>
             </div>
-            <div>
+            <div> 
                 <label>
                     No. Of Parking Spots
                 </label>
-                <input type = "text" name = "nps" value = "{{ pl.noOfParkingSpots }}"/>
+                <input type = "text" name = "nps" value = "{{ pl.noOfParkingSpots }}" {% if action == "details" %} readonly {% endif %}/>
             </div>
             <div>
                 <label>
                     Price Per Hour
                 </label>
-                <input type = "text" name = "pph" value = "{{ pl.pricePerHr }}"/>
+                <input type = "text" name = "pph" value = "{{ pl.pricePerHr }}" {% if action == "details" %} readonly {% endif %}/>
             </div>
             <div>
                 <label>
                     Street Name
                 </label>
-                <input type = "text" name = "n" value = "{{ pl.address.streetName }}"/>
+                <input type = "text" name = "n" value = "{{ pl.address.streetName }}" {% if action == "details" %} readonly {% endif %}/>
             </div>
             <div>
                 <label>
                     Locality
                 </label>
-                <input type = "text" name = "l" value = "{{ pl.address.locality }}"/>
+                <input type = "text" name = "l" value = "{{ pl.address.locality }}" {% if action == "details" %} readonly {% endif %}/>
             </div>
             <div>
                 <label>
                     Sub-Locality
                 </label>
-                <input type = "text" name = "sl" value = "{{ pl.address.subLocality }}"/>
+                <input type = "text" name = "sl" value = "{{ pl.address.subLocality }}" {% if action == "details" %} readonly {% endif %}/>
             </div>
             <div>
                 <label>
                     City
                 </label>
-                <input type = "text" name = "c" value = "{{ pl.address.city }}"/>
+                <input type = "text" name = "c" value = "{{ pl.address.city }}" {% if action == "details" %} readonly {% endif %}/>
             </div>
             <div>
                 <label>
                     State
                 </label>
-                <input type = "text" name = "s" value = "{{ pl.address.state }}"/>
+                <input type = "text" name = "s" value = "{{ pl.address.state }}" {% if action == "details" %} readonly {% endif %}/>
             </div>
             <div>
                 <label>
                     Pin Code
                 </label>
-                <input type = "text" name = "p" value = "{{ pl.address.pinCode }}"/>
+                <input type = "text" name = "p" value = "{{ pl.address.pinCode }}" {% if action == "details" %} readonly {% endif %}/>
             </div>
             <div>
-                <input type = "submit" value = "{{ action | title}}"/>
+                <label>
+                    No Of Occupied Parking Spots {{ noops }}
+                </label>
+            </div>
+            <div>
+                <label>
+                    No Of Vacant Parking Spots {{ novps }}
+                </label>
+            </div>
+            <div>
+                <input type = "submit" value = "{% if action == 'details' %} Back {% else %} Submit {% endif %}"/>
             </div>
         </form>
     </body>

@@ -20,32 +20,53 @@ def dashboard() :
         action = request.form["action"]
         if action == "create" :
             session["action"] = action
-            session["id"] = False
+            session["id"] = id
             return redirect(url_for("admin.parkingLotAction"))
         elif action == "edit" :
-            parkingLot = getParkingLot(id)
             session["action"] = action
             session["id"] = id
             return redirect(url_for("admin.parkingLotAction"))
         elif action == "delete" :
             deleteParkingLot(getParkingLot(id))
-            return render_template("adminDashboard.html", parkingLots = viewParkingLots())
+            return redirect(url_for("admin.dashboard"))
+        elif action == "details" :
+            session["action"] = action
+            session["id"] = id
+            return redirect(url_for("admin.parkingLotAction"))
+        elif action == "add1" :
+            parkingLot = getParkingLot(id)
+            createParkingSpot(parkingLot)
+            parkingLot.noOfParkingSpots += 1
+            db.session.add(parkingLot)
+            db.session.commit()
+            return redirect(url_for("admin.dashboard"))
+        elif action == "delete1" :
+            parkingLot = getParkingLot(id)
+            if len(db.session.execute(db.select(ParkingSpot).filter_by(parkingLotId = id, status = False)).scalars().all()) > 0 :
+                deleteParkingSpot(parkingLot)
+                parkingLot.noOfParkingSpots -= 1
+                db.session.add(parkingLot)
+                db.session.commit()
+            return redirect(url_for("admin.dashboard"))
+        return render_template("adminDashboard.html", parkingLots = viewParkingLots())
 
 @adminbp.route("/dashboard/action", methods = ["GET", "POST"])
 def parkingLotAction() :
     id = session.get("id")
     action = session.get("action")
-    if id :
+    if id is not None :
         parkingLot = getParkingLot(id)
     else :
         address = Address(streetName = "", locality = "", subLocality = "", city = "", state = "", pinCode = "")
-        parkingLot = ParkingLot(landmark = "", noOfParkingSpots = "", pricePerHr = "")
+        parkingLot = ParkingLot(landmark = "", noOfParkingSpots = 0, pricePerHr = 0)
         parkingLot.address = address
+    noOfOccupiedParkingSpots = len((db.session.execute(db.select(ParkingSpot).filter_by(status = True, parkingLotId = id)).scalars().all()))
+    noOfVacantParkingSpots = len((db.session.execute(db.select(ParkingSpot).filter_by(status = False, parkingLotId = id)).scalars().all()))
     if request.method == "GET" :
-        return render_template("parkingLotAction.html", action = action, pl = parkingLot)
+        return render_template("parkingLotAction.html", action = action, pl = parkingLot, noops = noOfOccupiedParkingSpots, novps = noOfVacantParkingSpots)
     elif request.method == "POST" :
         oldNoOfParkingSpots = parkingLot.noOfParkingSpots
-        newNoOfParkingSpots = request.form["nps"]
+        newNoOfParkingSpots = int(request.form["nps"])
         parkingLot.address.streetName = request.form["n"]
         parkingLot.address.locality = request.form["l"]
         parkingLot.address.subLocality = request.form["sl"]
@@ -54,59 +75,53 @@ def parkingLotAction() :
         parkingLot.address.pinCode = request.form["p"]
         parkingLot.landmark = request.form["la"]
         #parkingLot.noOfParkingSpots = request.form["nps"]  #no need to update as -= 1 is dont in deleteParkingSpot function which is called by updateParkingLot function
-        parkingLot.pricePerHr = request.form["pph"]
+        parkingLot.pricePerHr = int(request.form["pph"])
         if action == "create" :
             createParkingLot(parkingLot, newNoOfParkingSpots) 
         elif action == "edit" : 
-            if(not updateParkingLot(parkingLot, oldNoOfParkingSpots, newNoOfParkingSpots)) :
-                return redirect(url_for("admin.parkingLotAction"))
+            updateParkingLot(parkingLot, oldNoOfParkingSpots, newNoOfParkingSpots)
         session.pop("action")
         session.pop("id")
         return redirect(url_for("admin.dashboard"))
 
-def getParkingLot(id) :
+def getParkingLot(id) : 
     return db.session.execute(db.select(ParkingLot).filter_by(id = id)).scalars().first()
 
-def createParkingLot(parkingLot, nps) :
+def createParkingLot(parkingLot, nps) : 
     try :
         db.session.add(parkingLot)
-        db.session.commit()
-        id = parkingLot.id
+        db.session.flush()
         for i in range(nps) :
-            parkingSpot = ParkingSpot(status = False, parkingLotId = id)
-            db.session.add(parkingSpot)
-            parkingLot.parkingSpots += 1
+            createParkingSpot(parkingLot)
+        parkingLot.noOfParkingSpots = nps 
         db.session.commit()
     except IntegrityError as e :
         db.session.rollback()
 
-def viewParkingLots() :
-    parkingLots = db.session.execute(db.select(ParkingLot)).scalars().all()
-    return parkingLots
+def viewParkingLots() : 
+    return db.session.execute(db.select(ParkingLot)).scalars().all()
 
 def updateParkingLot(parkingLot, onps, nps) :
     try :
-        id = parkingLot.id
-        diff = int(onps) - int(nps)
-        if(diff < 0) :
+        db.session.add(parkingLot)
+        db.session.flush()
+        diff = onps - nps
+        print(diff)
+        if(diff < 0) : #if parking spots have to be added
             for i in range(abs(diff)) :
-                parkingSpot = ParkingSpot(status = False, parkingLotId = id)
-                db.session.add(parkingSpot)
-                db.session.commit()
-                parkingLot.noOfParkingSpots += 1
-            db.session.add(parkingLot)
-            db.session.commit()
-        elif(diff > 0) :
+                createParkingSpot(parkingLot)
+            parkingLot.noOfParkingSpots = nps
+        elif(diff > 0) : #if parking spots have to be removed
             for i in range(diff) :
                 if(deleteParkingSpot(parkingLot) == None) :
-                    return False
-            db.session.add(parkingLot)
-            db.session.commit()
-        return True
+                    i -= 1
+                    break
+            parkingLot.noOfParkingSpots = onps - i - 1
+        db.session.commit()
     except IntegrityError as e :
         db.session.rollback()
 
-def deleteParkingLot(parkingLot) :
+def deleteParkingLot(parkingLot) : 
     address = parkingLot.address
     parkingSpots = parkingLot.parkingSpots
     db.session.delete(address)
@@ -114,27 +129,36 @@ def deleteParkingLot(parkingLot) :
     for i in range(len(parkingSpots)) :
         db.session.delete(parkingSpots[i])
     db.session.commit()
+    db.session.expire_all()
 
-def viewParkingSpots(parkingLot) :
+def viewParkingSpots(parkingLot) : 
     return parkingLot.parkingSpots
 
-def createParkingSpots(parkingLot) :
+def createParkingSpot(parkingLot) : 
     id = parkingLot.id 
     parkingSpot = ParkingSpot(status = False, parkingLotId = id)
     db.session.add(parkingSpot)
-    db.session.commit()
+    #parkingLot.noOfParkingSpots += 1
+    #db.session.add(parkingLot)
+    #db.session.commit()
 
-def deleteParkingSpot(parkingLot) :
+def deleteParkingSpot(parkingLot) : 
     parkingSpots = parkingLot.parkingSpots
     for parkingSpot in parkingSpots :
         if parkingSpot.status == False :
-            parkingLot.noOfParkingSpots -= 1
-            db.session.add(parkingLot)
             db.session.delete(parkingSpot)
+            #parkingLot.noOfParkingSpots -= 1
+            #db.session.add(parkingLot)
             db.session.commit()
-            return parkingSpot
+            return True
     return None
 
-def viewUsers() :
-    users = db.session.execute(db.select(User)).scalars().all()
-    return users
+def viewUsers() : 
+    return db.session.execute(db.select(User)).scalars().all()
+
+@adminbp.route("/dashboard/users", methods = ["GET"])
+def users() :
+    if request.method == "GET" :
+        users = db.session.execute(db.select(User)).scalars().all()
+        return render_template("displayUsers.html", users = users)
+    
