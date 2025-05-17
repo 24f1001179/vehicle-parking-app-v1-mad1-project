@@ -12,7 +12,7 @@
     </head>
     <body>
         <h1>
-            User Dashboard
+            History
         </h1>
         <div>
             <a href = "/user/dashboard">
@@ -29,15 +29,11 @@
             </a>
         </div>
         <div>
-            {% for parkingLot in parkingLots %}
+            {% for reservedParkingSpot in reservedParkingSpots %}
                 <div>
-                    <form method = "POST" action = "/user/dashboard">
-                        {{ parkingLot.noOfParkingSpots }} 
-                        {{ parkingLot.pricePerHr }}
-                        <button type = "submit" name = "action" value = "reserve">
-                            Reserve
-                        </button>
-                    </form>
+                    {{ reservedParkingSpot.parkingTimestamp }}
+                    {{ reservedParkingSpot.leavingTimestamp }}
+                    {{ reservedParkingSpot.totalCost }}
                 </div>
             {% endfor %}
         </div>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset = "UTF-8"/>
+        <meta name = "Author" content = "J S Karthik"/>
+        <meta name = "Description" content = "User Dashboard Page"/>
+        <title>
+            Dashboard
+        </title>
+        <link rel = "stylesheet" href = "/static/bootstrap/css/bootstrap.min.css"/>
+        <link rel = "stylesheet" href = "/static/css/style.css"/>
+    </head>
+    <body>
+        <h1>
+            Reserved Spots
+        </h1>
+        <div>
+            <a href = "/user/dashboard">
+                Parking Lots
+            </a>
+            <a href = "/user/dashboard/reserved">
+                Reserved
+            </a>
+            <a href = "/user/dashboard/history">
+                History
+            </a>
+            <a href = "/signIn">
+                Logout
+            </a>
+        </div>
+        <div>
+            <form method = "POST" action = "/user/dashboard/reserved">
+                {{ reservedParkingSpot.parkingSpot.parkingLot.noOfSpots }}
+                {{ reservedParkingSpot.parkingSpot.parkingLot.pricePerHr }}
+                <input type = "hidden" name = "reservedParkingSpotId" value = "{{ reservedParkingSpot.id }}"/>
+                {% if reservedParkingSpot.parkingSpot.status %}
+                    <label>
+                        Occupied
+                    </label>
+                    <button type = "submit" name = "action" value = "vaccate">
+                        Vaccate
+                    </button>
+                {% else %}
+                    <label>
+                        Vaccant
+                    </label>
+                    <button type = "submit"name = "action" value = "occupy">
+                        Occupy
+                    </button>
+                    <button type = "submit"name = "action" value = "release">
+                        Release
+                    </button>
+                {% endif %}
+            </form>
+        </div>
+    </body>
+</html>

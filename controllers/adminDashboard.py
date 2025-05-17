@@ -106,7 +106,6 @@ def updateParkingLot(parkingLot, onps, nps) :
         db.session.add(parkingLot)
         db.session.flush()
         diff = onps - nps
-        print(diff)
         if(diff < 0) : #if parking spots have to be added
             for i in range(abs(diff)) :
                 createParkingSpot(parkingLot)

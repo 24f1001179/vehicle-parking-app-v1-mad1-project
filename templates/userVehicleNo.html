@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset = "UTF-8"/>
+        <meta name = "Author" content = "J S Karthik"/>
+        <meta name = "Description" content = "User Dashboard Page"/>
+        <title>
+            Dashboard
+        </title>
+        <link rel = "stylesheet" href = "/static/bootstrap/css/bootstrap.min.css"/>
+        <link rel = "stylesheet" href = "/static/css/style.css"/>
+    </head>
+    <body>
+        <h1>
+            Details
+        </h1>
+        <form method = "POST" action = "/user/dashboard/details">
+            <label>
+                Vehicle Number
+            </label>
+            <input type = "text" name = "vehicleNo"/>
+            <button type = "submit" name = "submit">
+                Submit 
+            </button>
+        </form>
+    </body>
+</html>
