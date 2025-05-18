@@ -91,3 +91,6 @@ def createUser(address, user) :
         db.session.rollback() #roll back if some error occurs and commit is not done
         return False
         
+@generalbp.route("/", methods = ["GET"])
+def landingPage() :
+    return render_template("general/landingPage.html")

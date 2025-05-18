@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html data-bs-theme="dark" class = "h-100">
     <head>
         <meta charset = "UTF-8"/>
         <meta name = "Author" content = "J S Karthik"/>
@@ -10,44 +10,80 @@
         <link rel = "stylesheet" href = "/static/bootstrap/css/bootstrap.min.css"/>
         <link rel = "stylesheet" href = "/static/css/style.css"/>
     </head>
-    <body>
-        <h1>
-            Sign In
-        </h1>
+    <body class = "h-100">
         <form method = "POST" action = "/signIn">
-            <div>
-                <label>
-                    Email Id
-                </label>
-                <input type = "email" name = "email"/>
-            </div>
-            <div>
-                <label>
-                    Password
-                </label>
-                <input type = "password" name = "password"/>
-            </div>
-            <div>
-                <label>
-                    Type
-                </label>
-                <input type = "radio" name = "type" value = "user" id = "userradio"/>
-                <label for = "userradio">
-                    User
-                </label>
-                <input type = "radio" name = "type" value = "admin" id = "adminradio"/>
-                <label for = "adminradio">
-                    Admin
-                </label>
-            </div>
-            <div>
-                <input type = "submit" name = "submit" value = "Sign In"/>
+            <div class = "container-fluid border d-flex align-items-center justify-content-center overflow-auto bg-body-tertiary" style = "height: 688px;">
+                <div class = "container-fluid border rounded-4 d-flex flex-wrap align-items-center justify-content-center overflow-auto pt-1 bg-body" style = "height: 90%; width: 90%;">
+                    <div class = "container-fluid border rounded-4 d-flex align-items-center justify-content-center overflow-auto" style = "height: 20%; width: 90%; background-color: rgb(76, 160, 189);">
+                        <h1>
+                            <a href = "/" class = "text-decoration-none text-reset w-100 h-100">
+                                ParkEase
+                            </a>
+                        </h1>
+                    </div>
+                    <div class = "container-fluid border rounded-4 d-flex justify-content-center align-items-center overflow-auto" style = "height: 70%; width: 90%;">
+                        <div class = "container-fluid d-flex flex-wrap align-items-center justify-content-center overflow-auto" style = "height: 90%; width: 100%">
+                            <div class = "container-fluid overflow-auto" style = "height: 77%; width: 95%;">
+                                <div>
+                                    <h3 class = "text-center">
+                                        Sign In To ParkEase
+                                    </h3>
+                                </div>
+                                <div class = "pt-2 pb-2">
+                                    <label class = "form-label">
+                                        Email Id
+                                    </label>
+                                    <input type = "email" name = "email" class = "form-control" required/>
+                                </div>
+                                <div class = "pt-2 pb-2">
+                                    <label class = "form-label">
+                                        Password
+                                    </label>
+                                    <input type = "password" name = "password" class = "form-control" required/>
+                                </div>
+                                <div class = "pt-4 pb-2 d-flex justify-content-end gap-3">
+                                    <div>
+                                        <label class = "form-check-label">
+                                            Sign In As
+                                        </label>
+                                    </div>
+                                    <div>
+                                        <input type = "radio" name = "type" value = "user" id = "userradio" class = "form-checked-input" checked/>
+                                        <label for = "userradio" class = "form-check-label">
+                                            User
+                                        </label>
+                                    </div>
+                                    <div>
+                                        <input type = "radio" name = "type" value = "admin" id = "adminradio" class = "form-checked-input"/>
+                                        <label for = "adminradio" class = "form-check-label">
+                                            Admin
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class = "container-fluid d-flex justify-content-center overflow-auto" style = "height: 23%; width: 95%;">
+                                <div class = "container-fluid overflow-auto" style = "height: 100%; width: 100%;">
+                                    <div class = "small d-flex align-items-end mb-2" style = "height: 41%;">
+                                        <label>
+                                            New To ParkEase?
+                                        </label>
+                                    </div>
+                                    <div class = "h-50">
+                                        <a href = "./signUp" class = "btn btn-primary d-flex align-items-center justify-content-center form-control text-decoration-none text-reset w-100 h-100">
+                                            Sign Up
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class = "container-fluid d-flex flex-wrap align-items-center justify-content-end overflow-auto" style = "height: 100%; width: 100%;">
+                                    <button type = "submit" name = "submit" value = "Sign In" class = "btn btn-primary form-control w-100 h-100">
+                                        Sign In 
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </form>
-        <div>
-            <a href = "./signUp">
-                Sign Up
-            </a>
-        </div>
     </body>
 </html>
