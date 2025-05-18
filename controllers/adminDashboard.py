@@ -14,7 +14,7 @@ def restrict() :
 @adminbp.route("/dashboard", methods = ["GET", "POST"])
 def dashboard() :
     if request.method == "GET" :
-        return render_template("adminDashboard.html", parkingLots = viewParkingLots())
+        return render_template("admin/adminDashboard.html", parkingLots = viewParkingLots())
     if request.method == "POST" :
         id = request.form.get("parkingLotId") #returns None if parkingLotId is not present in request.form #this happens when user performs action create
         action = request.form["action"]
@@ -48,7 +48,7 @@ def dashboard() :
                 db.session.add(parkingLot)
                 db.session.commit()
             return redirect(url_for("admin.dashboard"))
-        return render_template("adminDashboard.html", parkingLots = viewParkingLots())
+        return render_template("admin/adminDashboard.html", parkingLots = viewParkingLots())
 
 @adminbp.route("/dashboard/action", methods = ["GET", "POST"])
 def parkingLotAction() :
@@ -63,7 +63,7 @@ def parkingLotAction() :
     noOfOccupiedParkingSpots = len((db.session.execute(db.select(ParkingSpot).filter_by(status = True, parkingLotId = id)).scalars().all()))
     noOfVacantParkingSpots = len((db.session.execute(db.select(ParkingSpot).filter_by(status = False, parkingLotId = id)).scalars().all()))
     if request.method == "GET" :
-        return render_template("parkingLotAction.html", action = action, pl = parkingLot, noops = noOfOccupiedParkingSpots, novps = noOfVacantParkingSpots)
+        return render_template("admin/parkingLotAction.html", action = action, pl = parkingLot, noops = noOfOccupiedParkingSpots, novps = noOfVacantParkingSpots)
     elif request.method == "POST" :
         oldNoOfParkingSpots = parkingLot.noOfParkingSpots
         newNoOfParkingSpots = int(request.form["nps"])
@@ -159,5 +159,11 @@ def viewUsers() :
 def users() :
     if request.method == "GET" :
         users = db.session.execute(db.select(User)).scalars().all()
-        return render_template("displayUsers.html", users = users)
+        return render_template("admin/displayUsers.html", users = users)
     
+
+@adminbp.route("/dashboard/history", methods = ["GET"])
+def history() :
+    if request.method == "GET" :
+        reservedParkingSpots = db.session.execute(db.select(ReservedParkingSpot)).scalars().all()
+        return render_template("admin/reservationHistory.html", reservedParkingSpots = reservedParkingSpots)

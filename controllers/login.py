@@ -10,7 +10,7 @@ from sqlalchemy.exc import IntegrityError
 @generalbp.route("/signIn", methods = ["GET", "POST"])
 def signIn() :
     if request.method == "GET" :
-        return render_template("signIn.html")
+        return render_template("general/signIn.html")
     elif request.method == "POST" :
         type = request.form["type"]
         email = request.form["email"]
@@ -42,7 +42,7 @@ def adminAuth(email, password) :
 @generalbp.route("/signUp", methods = ["GET", "POST"])
 def signUp() :
     if request.method == "GET" :
-        return render_template("signUp.html")
+        return render_template("general/signUp.html")
     elif request.method == "POST" :
         email = request.form["email"]
         password = request.form["password"]
@@ -58,7 +58,7 @@ def signUp() :
 @generalbp.route("/signUp/additionalDetails", methods = ["GET", "POST"])
 def additionalDetails() :
     if request.method == "GET" :
-        return render_template("additionalDetails.html")
+        return render_template("general/additionalDetails.html")
     elif request.method == "POST" :
         email = session.pop("email", None)
         password = session.pop("password", None) #if password is not present in session then None is returned. Without None KeyError is thrown.

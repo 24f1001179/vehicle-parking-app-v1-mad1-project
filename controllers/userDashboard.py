@@ -16,22 +16,22 @@ def restrict() :
 @userbp.route("/dashboard", methods = ["GET", "POST"])
 def dashboard() :
     if request.method == "GET" :
-        return render_template("userDashboard.html", parkingLots = viewParkingLots())
+        return render_template("user/userDashboard.html", parkingLots = viewParkingLots())
     elif request.method == "POST" :
         return redirect(url_for("user.vehicleNo"))
-    return render_template("userDashboard.html", parkingLots = viewParkingLots())
+    return render_template("user/userDashboard.html", parkingLots = viewParkingLots())
 
 @userbp.route("/dashboard/details", methods = ["GET", "POST"])
 def vehicleNo() :
     if request.method == "GET" :
-        return render_template("userVehicleNo.html")
+        return render_template("user/userVehicleNo.html")
     elif request.method == "POST" :
         vehicleNo = request.form["vehicleNo"]
         if createReservedParkingSpot(vehicleNo) :
             return redirect(url_for("user.reserved"))
         else :
             return redirect(url_for("user.dashboard"))
-    return render_template("userVehicleNo.html")
+    return render_template("user/userVehicleNo.html")
 
 @userbp.route("/dashboard/reserved", methods = ["GET", "POST"])
 def reserved() :
@@ -39,7 +39,7 @@ def reserved() :
         reserved = currentReservedParkingSpot()
         if reserved is not None:
             print(reserved)
-            return render_template("reservedSpot.html", reservedParkingSpot = reserved)
+            return render_template("user/reservedSpot.html", reservedParkingSpot = reserved)
         else :
             return "No Reserved Parking Spots"
     elif request.method == "POST" :
@@ -53,11 +53,11 @@ def reserved() :
         elif action == "vaccate" :
             addLeavingTimestampAndTotalCost(id)
         return redirect(url_for("user.dashboard"))
-    return render_template("reservedSpot.html")
+    return render_template("user/reservedSpot.html")
 
 @userbp.route("/dashboard/history", methods = ["GET"])
 def history() :
-    return render_template("reservedSpotHistory.html", reservedParkingSpots = viewAllReservedParkingSpots())
+    return render_template("user/reservedSpotHistory.html", reservedParkingSpots = viewAllReservedParkingSpots())
 
 def addParkingTimestamp(id) :
     now = datetime.now()

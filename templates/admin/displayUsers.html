@@ -21,24 +21,29 @@
             <a href = "/admin/dashboard/users">
                 Users
             </a>
+            <a href = "/admin/dashboard/history">
+                Reservation History
+            </a>
             <a href = "/signIn">
                 Logout
             </a>
         </div>
         <div>
             {% for user in users %}
-                <span>
-                    {{ user.firstName }}
-                </span>
-                <span>
-                    {{ user.lastName }}
-                </span>
-                <span>
-                    {{ user.age }}
-                </span>
-                <span>
-                    {{ user.email }}
-                </span>
+                <div>
+                    <span>
+                        {{ user.firstName }}
+                    </span>
+                    <span>
+                        {{ user.lastName }}
+                    </span>
+                    <span>
+                        {{ user.age }}
+                    </span>
+                    <span>
+                        {{ user.email }}
+                    </span>
+                </div>
             {% endfor %}
         </div>
     </body>

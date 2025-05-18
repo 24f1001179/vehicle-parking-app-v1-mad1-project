@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset = "UTF-8"/>
+        <meta name = "Author" content = "J S Karthik"/>
+        <meta name = "Description" content = "Display All Users Page"/>
+        <title>
+            Reservation History
+        </title>
+        <link rel = "stylesheet" href = "/static/bootstrap/css/bootstrap.min.css"/>
+        <link rel = "stylesheet" href = "/static/css/style.css"/>
+    </head>
+    <body>
+        <h1>
+            Reservation History
+        </h1>
+        <div>
+            <a href = "/admin/dashboard">
+                Parking Lots
+            </a>
+            <a href = "/admin/dashboard/users">
+                Users
+            </a>
+            <a href = "/admin/dashboard/history">
+                Reservation History
+            </a>
+            <a href = "/signIn">
+                Logout
+            </a>
+        </div>
+        <div>
+            {% for reservedParkingSpot in reservedParkingSpots %}
+                <div>
+                    {{ reservedParkingSpot.parkingTimestamp }}
+                    {{ reservedParkingSpot.leavingTimestamp }}
+                    {{ (reservedParkingSpot.leavingTimestamp - reservedParkingSpot.parkingTimestamp) }}
+                    {{ reservedParkingSpot.totalCost }}
+                </div>
+            {% endfor %}
+        </div>
+    </body>
+</html>
