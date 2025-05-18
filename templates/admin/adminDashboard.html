@@ -39,6 +39,13 @@
                     Add A Parking Lot
                 </button>
             </form>
+            <form method = "POST" action = "/admin/dashboard/searchResults">
+                <input type = "hidden" name = "type" value = "ParkingLot"/>
+                <input type = "text" name = "searchValue"/>
+                <button type = "submit" name = "action" value = "search">
+                    Search
+                </button>
+            </form>
         </div>
         <div>
             {% for parkingLot in parkingLots %}

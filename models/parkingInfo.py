@@ -9,6 +9,8 @@ class ParkingLot(db.Model) :
     addressId = db.Column(db.Integer, db.ForeignKey("address.id"))
     address = db.relationship("Address", uselist = False, backref = "parkingLot")
     parkingSpots = db.relationship("ParkingSpot", backref = "parkingLot") #parking lot and parking spot is 1 - M
+    def __str__(self) :
+        return "{} {} {} {} {}".format(self.id, self.landmark.lower(), self.noOfParkingSpots, self.pricePerHr, self.address.__str__())
 
 class ParkingSpot(db.Model) :
     __tablename__ = "parkingspot"
@@ -27,3 +29,5 @@ class ReservedParkingSpot(db.Model) :
     leavingTimestamp = db.Column(db.DateTime)
     totalCost = db.Column(db.Integer)
     vehicleNumber = db.Column(db.String)
+    def __str__(self) :
+        return "{} {} {} {} {}".format(self.id, self.parkingTimestamp, self.leavingTimestamp, self.totalCost, self.vehicleNumber)

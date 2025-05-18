@@ -33,10 +33,21 @@
                 <div>
                     {{ reservedParkingSpot.parkingTimestamp }}
                     {{ reservedParkingSpot.leavingTimestamp }}
-                    {{ (reservedParkingSpot.leavingTimestamp - reservedParkingSpot.parkingTimestamp) }}
+                    {% if reservedParkingSpot.parkingTimestamp and reservedParkingSpot.leavingTimestamp %}
+                        {{ reservedParkingSpot.parkingTimestamp }}
+                    {% endif %}
                     {{ reservedParkingSpot.totalCost }}
                 </div>
             {% endfor %}
+        </div>
+        <div>
+            <form method = "POST" action = "/admin/dashboard/searchResults">
+                <input type = "hidden" name = "type" value = "ReservedParkingSpot"/>
+                <input type = "text" name = "searchValue"/>
+                <button type = "submit" name = "action" value = "search">
+                    Search
+                </button>
+            </form>
         </div>
     </body>
 </html>

@@ -3,7 +3,7 @@ from flask import render_template, url_for, redirect
 from controllers.bp import userbp 
 from dbInit import db
 from models.userInfo import User
-from models.parkingInfo import ParkingSpot, ReservedParkingSpot
+from models.parkingInfo import ParkingSpot, ReservedParkingSpot, ParkingLot
 from controllers.adminDashboard import viewParkingLots
 from datetime import datetime
 from math import ceil
@@ -105,3 +105,17 @@ def currentReservedParkingSpot() :
 def summary() :
     if request.method == "GET" :
         return render_template("user/summary.html", reservedParkingSpots = viewAllReservedParkingSpots() )
+    
+@userbp.route("/dashboard/searchResults", methods = ["POST"])
+def searchResults() :
+    type = request.form["type"]
+    searchValue = request.form["searchValue"].lower()
+    newRecs = []
+    model = globals()[type]
+    for i in db.session.execute(db.select(model)).scalars().all() :
+        j = i.__str__()
+        if searchValue in j :
+            newRecs.append(j[0])
+    searchResult = db.session.execute(db.select(model).filter(model.id.in_(newRecs))).scalars().all()
+    if type == "ParkingLot" :
+        return render_template("user/userDashboard.html", parkingLots = searchResult)
