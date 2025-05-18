@@ -12,7 +12,7 @@
     </head>
     <body>
         <h1>
-            History
+            Summary
         </h1>
         <div>
             <a href = "/user/dashboard">
@@ -34,8 +34,6 @@
         <div>
             {% for reservedParkingSpot in reservedParkingSpots %}
                 <div>
-                    {{ reservedParkingSpot.parkingTimestamp }}
-                    {{ reservedParkingSpot.leavingTimestamp }}
                     {{ reservedParkingSpot.totalCost }}
                 </div>
             {% endfor %}

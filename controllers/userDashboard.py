@@ -100,3 +100,8 @@ def viewAllReservedParkingSpots() :
 
 def currentReservedParkingSpot() :
     return db.session.execute(db.select(ReservedParkingSpot).filter_by(userId = session["id"], totalCost = None)).scalars().first()
+
+@userbp.route("/dashboard/summary", methods = ["GET"])
+def summary() :
+    if request.method == "GET" :
+        return render_template("user/summary.html", reservedParkingSpots = viewAllReservedParkingSpots() )
