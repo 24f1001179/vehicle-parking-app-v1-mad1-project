@@ -18,6 +18,7 @@ def dashboard() :
     if request.method == "GET" :
         return render_template("user/userDashboard.html", parkingLots = viewParkingLots())
     elif request.method == "POST" :
+        session["parkingLotId"] = request.form["parkingLotId"]
         return redirect(url_for("user.vehicleNo"))
     return render_template("user/userDashboard.html", parkingLots = viewParkingLots())
 
@@ -85,7 +86,8 @@ def deleteReservedParkingSpot(id) :
 
 def createReservedParkingSpot(vehicleNo) :
     if currentReservedParkingSpot() is None:
-        aParkingSpot = db.session.execute(db.select(ParkingSpot).filter_by(status = False)).scalars().first()
+        parkingLotId = session.pop("parkingLotId")
+        aParkingSpot = db.session.execute(db.select(ParkingSpot).filter_by(status = False, parkingLotId = parkingLotId)).scalars().first()
         thisUser = db.session.execute(db.select(User).filter_by(id = session["id"])).scalars().first()
         if aParkingSpot is None :
             return False

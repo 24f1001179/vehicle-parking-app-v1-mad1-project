@@ -10,21 +10,22 @@
         <link rel = "stylesheet" href = "/static/bootstrap/css/bootstrap.min.css"/>
         <link rel = "stylesheet" href = "/static/css/style.css"/>
     </head>
-    <body>
-        <div class = "container-fluid border d-flex justify-content-center overflow-auto bg-body" style = "height: 688px;">
-            <div class = "mt-2 rounded-4 container-fluid border d-flex align-items-center justify-content-center overflow-auto position-fixed" style = "height: 10%; width: 94%; background-color: rgba(33, 37, 41, 0.8);">
+    <body class = "h-100">
+        <div class = "container-fluid bg-body-tertiary min-vh-100">
+            <div class = "container-fluid d-flex justify-content-center bg-body">
+                <div class = "container-fluid mt-2 rounded-4 container-fluid border d-flex align-items-center justify-content-center overflow-auto position-fixed" style = "height: 100px; width: 98%; background-color: rgba(33, 37, 41, 0.8); z-index: 1000;">
                     <a href = "/" class = "text-decoration-none text-reset me-2">
                         <h3>
                             ParkEase
                         </h3>
                     </a>
                     <ul class = "nav nav-tabs">
-                        <li class = "nav=item0">
+                        <li class = "nav-item">
                             <a class = "nav-link active" href = "/">
                                 Home
                             </a>
                         </li>
-                        <li>
+                        <li class = "nav-item">
                             <a class = "nav-link", href = "/signIn">
                                 Sign In
                             </a>
@@ -34,27 +35,25 @@
                                 Sign Up
                             </a>
                         </li>
-                        <li class = "nav=item0">
+                        <li class = "nav-item">
                             <a class = "nav-link" href = "/user/dashboard">
                                 Dashboard
                             </a>
                         </li>
                     </ul>
                 </div>
-            <div class = "mt-1 border rounded-4 container-fluid overflow-auto bg-body-tertiary" style = "height: 99%; width: 99%;">
-                <div class = "container-fluid" style = "margin-top: 6%;">
-                    <div class = "text-center">
-                        <h1>
-                            ParkEase
-                        </h1>
-                    </div>
-                    <div class = "text-end">
-                       <h3>
-                            Find. Park. Relax. With ParkEase.
-                        </h3> 
-                    </div>
+            </div>
+            <div class = "rounded-3 container-fluid bg-body p-2 overflow-fixed" style = "height: 80%; width: 100%; margin-top: 120px;">
+                <div class = "text-center">
+                    <h1>
+                        ParkEase
+                    </h1>
                 </div>
-                
+                <div class = "text-end">
+                    <h3>
+                        Find. Park. Relax. With ParkEase.
+                    </h3> 
+                </div>
             </div>
         </div>
     </body>

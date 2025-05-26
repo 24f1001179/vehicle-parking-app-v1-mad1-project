@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class = "h-100" data-bs-theme = "dark">
     <head>
         <meta charset = "UTF-8"/>
         <meta name = "Author" content = "J S Karthik"/>
@@ -10,51 +10,95 @@
         <link rel = "stylesheet" href = "/static/bootstrap/css/bootstrap.min.css"/>
         <link rel = "stylesheet" href = "/static/css/style.css"/>
     </head>
-    <body>
-        <h1>
-            Reserved Spots
-        </h1>
-        <div>
-            <a href = "/user/dashboard">
-                Parking Lots
-            </a>
-            <a href = "/user/dashboard/reserved">
-                Reserved
-            </a>
-            <a href = "/user/dashboard/history">
-                History
-            </a>
-            <a href = "/user/dashboard/summary">
-                Summary
-            </a>
-            <a href = "/signIn">
-                Logout
-            </a>
-        </div>
-        <div>
-            <form method = "POST" action = "/user/dashboard/reserved">
-                {{ reservedParkingSpot.parkingSpot.parkingLot.noOfSpots }}
-                {{ reservedParkingSpot.parkingSpot.parkingLot.pricePerHr }}
-                <input type = "hidden" name = "reservedParkingSpotId" value = "{{ reservedParkingSpot.id }}"/>
-                {% if reservedParkingSpot.parkingSpot.status %}
-                    <label>
-                        Occupied
-                    </label>
-                    <button type = "submit" name = "action" value = "vaccate">
-                        Vaccate
-                    </button>
-                {% else %}
-                    <label>
-                        Vaccant
-                    </label>
-                    <button type = "submit"name = "action" value = "occupy">
-                        Occupy
-                    </button>
-                    <button type = "submit"name = "action" value = "release">
-                        Release
-                    </button>
-                {% endif %}
-            </form>
+    <body class = "h-100">
+        <div class = "container-fluid bg-body-tertiary min-vh-100">
+            <div class = "container-fluid d-flex justify-content-center bg-body">
+                <div class = "container-fluid mt-2 rounded-4 container-fluid border d-flex align-items-center justify-content-center overflow-auto position-fixed" style = "height: 100px; width: 98%; background-color: rgba(33, 37, 41, 0.9); z-index: 1000;">
+                    <a href = "/" class = "text-decoration-none text-reset me-2">
+                        <h3>
+                            ParkEase
+                        </h3>
+                    </a>
+                    <ul class = "nav nav-tabs">
+                        <li class = "nav-item">
+                            <a class = "nav-link" href = "/user/dashboard">
+                                Parking Lots
+                            </a>
+                        </li>
+                        <li class = "nav-item">
+                            <a class = "nav-link active", href = "/user/dashboard/reserved">
+                                Reserved
+                            </a>
+                        </li>
+                        <li class = "nav-item">
+                            <a class = "nav-link", href = "/user/dashboard/history">
+                                History
+                            </a>
+                        </li>
+                        <li class = "nav-item">
+                            <a class = "nav-link" href = "/user/dashboard/summary">
+                                Summary
+                            </a>
+                        </li>
+                        <li class = "nav-item">
+                            <a class = "nav-link" href = "/signIn">
+                                Logout
+                            </a>
+                        </li>
+                        <li class = "nav-item">
+                            <a class = "nav-link" href = "/">
+                                Website
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class = "rounded-3 container-fluid bg-body p-2 overflow-fixed" style = "height: 80%; width: 100%; margin-top: 120px;">
+                <div class = "d-flex justify-content-center align-items-center gap-2" style = "height: 60px;">
+                    <h3>
+                        Reserved Parking Spot
+                    </h3>
+                </div>
+                <div>
+                    <form method = "POST" action = "/user/dashboard/reserved" style = "height: 100%; width: 100%;">
+                        <p>
+                            Total Spots: {{ reservedParkingSpot.parkingSpot.parkingLot.noOfParkingSpots }} 
+                            </br>
+                            Available Spots: {{ reservedParkingSpot.parkingSpot.parkingLot.parkingSpots | selectattr("status", "equalto", 0) | list | count }}
+                            </br>
+                            Price Per Hr: {{ reservedParkingSpot.parkingSpot.parkingLot.pricePerHr }}
+                            </br>
+                            Landmark: {{ reservedParkingSpot.parkingSpot.parkingLot.landmark }}
+                            </br>
+                            Address: {{ reservedParkingSpot.parkingSpot.parkingLot.address | title }}
+                            </br>
+                            Vehicle No: {{ reservedParkingSpot.vehicleNumber }}
+                        </p>
+                        <input type = "hidden" name = "reservedParkingSpotId" value = "{{ reservedParkingSpot.id }}"/>
+                        {% if reservedParkingSpot.parkingSpot.status %}
+                            <p>
+                                Parking Timestamp: {{ reservedParkingSpot.parkingTimestamp }}
+                            </p>
+                            <h4>
+                                Occupied
+                                <button type = "submit" name = "action" value = "vaccate" class = "btn btn-primary">
+                                    Vaccate
+                                </button>
+                            </h4>
+                        {% else %}
+                            <h4>
+                                Vaccant
+                                <button type = "submit"name = "action" value = "occupy" class = "btn btn-primary">
+                                    Occupy
+                                </button>
+                                <button type = "submit"name = "action" value = "release" class = "btn btn-primary">
+                                    Release
+                                </button>
+                            </h4>
+                        {% endif %}
+                    </form>
+                </div>
+            </div>
         </div>
     </body>
 </html>
