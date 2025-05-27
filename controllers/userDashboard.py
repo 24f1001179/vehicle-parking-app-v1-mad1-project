@@ -38,11 +38,7 @@ def vehicleNo() :
 def reserved() :
     if request.method == "GET" :
         reserved = currentReservedParkingSpot()
-        if reserved is not None:
-            print(reserved)
-            return render_template("user/reservedSpot.html", reservedParkingSpot = reserved)
-        else :
-            return "No Reserved Parking Spots"
+        return render_template("user/reservedSpot.html", reservedParkingSpot = reserved)
     elif request.method == "POST" :
         id = request.form["reservedParkingSpotId"]
         action = request.form["action"]

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class = "h-100" data-bs-theme = "dark">
     <head>
         <meta charset = "UTF-8"/>
         <meta name = "Author" content = "J S Karthik"/>
@@ -10,68 +10,110 @@
         <link rel = "stylesheet" href = "/static/bootstrap/css/bootstrap.min.css"/>
         <link rel = "stylesheet" href = "/static/css/style.css"/>
     </head>
-    <body>
-        <h1>
-            Admin Dashboard
-        </h1>
-        <div>
-            <a href = "/admin/dashboard">
-                Parking Lots
-            </a>
-            <a href = "/admin/dashboard/users">
-                Users
-            </a>
-            <a href = "/admin/dashboard/history">
-                Reservation History
-            </a>
-            <a href = "/signIn">
-                Logout
-            </a>
-        </div>
-        <div>
-            <h2>
-                Parking Lots
-            </h2>
-        </div>
-        <div>
-            <form method = "POST" action = "/admin/dashboard">
-                <button type = "submit" name = "action" value = "create">
-                    Add A Parking Lot
-                </button>
-            </form>
-            <form method = "POST" action = "/admin/dashboard/searchResults">
-                <input type = "hidden" name = "type" value = "ParkingLot"/>
-                <input type = "text" name = "searchValue"/>
-                <button type = "submit" name = "action" value = "search">
-                    Search
-                </button>
-            </form>
-        </div>
-        <div>
-            {% for parkingLot in parkingLots %}
-                <div>
-                    <form method = "POST" action = "/admin/dashboard">
-                        {{ parkingLot.noOfParkingSpots }} 
-                        {{ parkingLot.pricePerHr }}
-                        <input type = "hidden" name = "parkingLotId" value = "{{ parkingLot.id }}"/>
-                        <button type = "submit" name = "action" value = "edit">
-                            Edit 
-                        </button>
-                        <button type = "submit" name = "action" value = "delete">
-                            Delete 
-                        </button>
-                        <button type = "submit" name = "action" value = "details">
-                            Details
-                        </button>
-                        <button type = "submit" name = "action" value = "add1">
-                            Add One Parking Spot
-                        </button>
-                        <button type = "submit" name = "action" value = "delete1">
-                            Delete One Parking Spot
-                        </button>
-                    </form>
+    <body class = "h-100">
+        <div class = "container-fluid bg-body-tertiary min-vh-100">
+            <div class = "container-fluid d-flex justify-content-center bg-body">
+                <div class = "container-fluid mt-2 rounded-4 container-fluid border d-flex align-items-center justify-content-center overflow-auto position-fixed border-primary" style = "height: 100px; width: 98%; background-color: rgba(33, 37, 41, 0.9); z-index: 1000;">
+                    <a href = "/" class = "text-decoration-none text-reset me-2">
+                        <h3>
+                            ParkEase
+                        </h3>
+                    </a>
+                    <ul class = "nav nav-tabs">
+                        <li class = "nav-item">
+                            <a class = "nav-link active" href = "/admin/dashboard">
+                                Parking Lots
+                            </a>
+                        </li>
+                        <li class = "nav-item">
+                            <a class = "nav-link", href = "/admin/dashboard/users">
+                                Users
+                            </a>
+                        </li>
+                        <li class = "nav-item">
+                            <a class = "nav-link", href = "/admin/dashboard/history">
+                                History
+                            </a>
+                        </li>
+                        <li class = "nav-item">
+                            <a class = "nav-link" href = "/signIn">
+                                Logout
+                            </a>
+                        </li>
+                        <li class = "nav-item">
+                            <a class = "nav-link" href = "/">
+                                Website
+                            </a>
+                        </li>
+                    </ul>
                 </div>
-            {% endfor %}
+            </div>
+            <div class = "rounded-3 container-fluid bg-body p-2 overflow-auto" style = "height: 80%; width: 100%; margin-top: 120px;">
+                <div class = "d-flex justify-content-center align-items-center gap-2" style = "height: 60px;">
+                    <h3>
+                        Parking Lots 
+                    </h3>
+                    <p>
+                        <form method = "POST" action = "/admin/dashboard" class = "d-flex">
+                            <button type = "submit" name = "action" value = "create" class = "btn btn-primary btn-sm" style = "height: 40px; width: 150px;">
+                                Add A Parking Lot
+                            </button>
+                        </form>
+                        <form method = "POST" action = "/admin/dashboard/searchResults" class = "d-flex">
+                            <input type = "hidden" name = "type" value = "ParkingLot"/>
+                            <input type = "text" name = "searchValue" class = "form-control" style = "height: 40px;"/>
+                            <button type = "submit" name = "action" value = "search" class = "btn btn-primary btn-sm" style = "height: 40px;">
+                                Search
+                            </button>
+                        </form>
+                    </p>
+                </div>
+                <div class = "ms-1 me-1">
+                    <div class = "row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 row-cols-xxl-6">
+                        {% for parkingLot in parkingLots %}
+                            <div class = "col p-1">
+                                <div class = "card p-1 border-primary">
+                                    <form method = "POST" action = "/admin/dashboard" style = "height: 100%; width: 100%;">
+                                        <div class = "card-body">
+                                            <h5 class = "card-title text-center border-bottom">
+                                                Lot #{{ parkingLot.id }}
+                                            </h5>
+                                            <input type = "hidden" name = "parkingLotId" value = "{{ parkingLot.id }}"/>
+                                            <div class = "container-fluid d-flex align-items-center justify-content-center gap-1">
+                                                <button type = "submit" name = "action" value = "edit" class = "btn btn-primary btn-sm" style = "width: 100%;">
+                                                    Edit 
+                                                </button>
+                                                <button type = "submit" name = "action" value = "delete" class = "btn btn-primary btn-sm" style = "width: 100%;">
+                                                    Delete 
+                                                </button>
+                                                <button type = "submit" name = "action" value = "details" class = "btn btn-primary btn-sm" style = "width: 100%;">
+                                                    Details
+                                                </button>
+                                            </div>
+                                            <p class = "card-text text-center">
+                                                {{ parkingLot.parkingSpots | selectattr("status", "equalto", 0) | list | count }} / {{ parkingLot.noOfParkingSpots }} Spots Available
+                                                </br>
+                                                <button type = "submit" name = "action" value = "add1" class = "btn btn-primary btn-sm">
+                                                    +1
+                                                </button>
+                                                <button type = "submit" name = "action" value = "delete1" class = "btn btn-primary btn-sm">
+                                                    -1
+                                                </button>
+                                                </br>
+                                                {{ parkingLot.pricePerHr }} Rs Per Hr
+                                                </br>
+                                                Landmark: {{ parkingLot.landmark }}
+                                                </br>
+                                                Address: {{ parkingLot.address | title }}
+                                            </p>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
 </html>

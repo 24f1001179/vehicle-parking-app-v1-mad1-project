@@ -13,7 +13,7 @@
     <body class = "h-100">
         <div class = "container-fluid bg-body-tertiary min-vh-100">
             <div class = "container-fluid d-flex justify-content-center bg-body">
-                <div class = "container-fluid mt-2 rounded-4 container-fluid border d-flex align-items-center justify-content-center overflow-auto position-fixed" style = "height: 100px; width: 98%; background-color: rgba(33, 37, 41, 0.9); z-index: 1000;">
+                <div class = "container-fluid mt-2 rounded-4 container-fluid border d-flex align-items-center justify-content-center overflow-auto position-fixed border-primary" style = "height: 100px; width: 98%; background-color: rgba(33, 37, 41, 0.9); z-index: 1000;">
                     <a href = "/" class = "text-decoration-none text-reset me-2">
                         <h3>
                             ParkEase
@@ -53,7 +53,7 @@
                     </ul>
                 </div>
             </div>
-            <div class = "rounded-3 container-fluid bg-body p-2 overflow-fixed" style = "height: 80%; width: 100%; margin-top: 120px;">
+            <div class = "rounded-3 container-fluid bg-body p-2 overflow-auto" style = "height: 80%; width: 100%; margin-top: 120px;">
                 <div class = "d-flex justify-content-center align-items-center gap-2" style = "height: 60px;">
                     <h3>
                         Parking Lots 
@@ -62,7 +62,7 @@
                         <form method = "POST" action = "/user/dashboard/searchResults" class = "d-flex">
                             <input type = "hidden" name = "type" value = "ParkingLot"/>
                             <input type = "text" name = "searchValue" class = "form-control" style = "height: 40px;"/> &nbsp;
-                            <button type = "submit" name = "action" value = "search" class = "btn btn-primary" style = "height: 40px;">
+                            <button type = "submit" name = "action" value = "search" class = "btn btn-primary btn-sm" style = "height: 40px;">
                                 Search
                             </button>
                         </form>
@@ -72,22 +72,20 @@
                     <div class = "row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 row-cols-xxl-6">
                         {% for parkingLot in parkingLots %}
                             <div class = "col p-1">
-                                <div class = "card p-1">
+                                <div class = "card p-1 border-primary">
                                     <form method = "POST" action = "/user/dashboard" style = "height: 100%; width: 100%;">
                                         <div class = "card-body">
-                                            <h4 class = "card-title text-center">
+                                            <h5 class = "card-title text-center border-bottom">
                                                 Lot #{{ parkingLot.id }}
-                                                <input type = "hidden" name = "parkingLotId" value = "{{ parkingLot.id }}"/>
-                                                <button type = "submit" name = "action" value = "reserve" class = "btn btn-primary" style = "z-index: 998; position: relative;">
-                                                        Reserve
-                                                </button>
-                                            </h4>
-                                            <p class = "card-text">
-                                                Total Spots: {{ parkingLot.noOfParkingSpots }} 
+                                            </h5>
+                                            <input type = "hidden" name = "parkingLotId" value = "{{ parkingLot.id }}"/>
+                                            <button type = "submit" name = "action" value = "reserve" class = "btn btn-primary btn-sm" style = "z-index: 998; position: relative; width: 100%;">
+                                                Reserve
+                                            </button>
+                                            <p class = "card-text text-center">
+                                                {{ parkingLot.parkingSpots | selectattr("status", "equalto", 0) | list | count }} / {{ parkingLot.noOfParkingSpots }} Spots Available
                                                 </br>
-                                                Available Spots: {{ parkingLot.parkingSpots | selectattr("status", "equalto", 0) | list | count }}
-                                                </br>
-                                                Price Per Hr: {{ parkingLot.pricePerHr }}
+                                                {{ parkingLot.pricePerHr }} Rs Per Hr
                                                 </br>
                                                 Landmark: {{ parkingLot.landmark }}
                                                 </br>
