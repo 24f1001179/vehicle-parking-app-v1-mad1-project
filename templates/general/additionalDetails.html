@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class = "h-100" data-bs-theme = "dark">
     <head>
         <meta charset = "UTF-8"/>
         <meta name = "Author" content = "J S Karthik"/>
@@ -10,68 +10,91 @@
         <link rel = "stylesheet" href = "/static/bootstrap/css/bootstrap.min.css"/>
         <link rel = "stylesheet" href = "/static/css/style.css"/>
     </head>
-    <body>
-        <h1>
-            Additional Details
-        </h1>
-        <form method = "POST" action = "/signUp/additionalDetails">
-            <div>
-                <label>
-                    First Name
-                </label>
-                <input type = "text" name = "firstName"/>
+    <body class = "h-100">
+        <div class = "container-fluid bg-body-tertiary min-vh-100 d-flex align-items-center justify-content-center">
+            <div class = "rounded-3 container-fluid bg-body p-2 overflow-auto" style = "height: 100%; width: 60%;">
+                <div class = "container-fluid d-flex justify-content-center align-items-center gap-2" style = "height: 60px;">
+                    <h3>
+                        Additional Details
+                    </h3>
+                </div>
+                <div class = "container-fluid" style = "width: 100%; height: 100%;">
+                    <form method = "POST" action = "/admin/dashboard/action" style = "width: 100%; height: 100%;">
+                        <div class = "row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-2 row-cols-xl-3 row-cols-xxl-3 px-5">
+                            <div class = "col">
+                                <label>
+                                    First Name
+                                </label>
+                                <input type = "text" name = "firstName" style = "width: 100%"/>
+                            </div>
+                            <div class = "col">
+                                <label>
+                                    Last Name
+                                </label>
+                                <input type = "text" name = "lastName" style = "width: 100%"/>
+                            </div>
+                            <div class = "col">
+                                <label>
+                                    Age
+                                </label>
+                                <input type = "text" name = "age" style = "width: 100%"/>
+                            </div>
+                        </div>
+                        </br>   
+                        <h5 class = "px-5">
+                            Address
+                        </h5>
+                        <div class = "row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 row-cols-xl-2 row-cols-xxl-2 px-5">
+                            <div class = "col">
+                                <label>
+                                    Street Name
+                                </label>
+                                <input type = "text" name = "streetName" style = "width: 100%"/>
+                            </div>
+                            <div class = "col">
+                                <label>
+                                    Locality
+                                </label>
+                                <input type = "text" name = "locality" style = "width: 100%"/>
+                            </div>
+                        </div>
+                        <div class = "row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-4 px-5">
+                            <div class = "col">
+                                <label>
+                                    Sub-Locality
+                                </label>
+                                <input type = "text" name = "subLocality" style = "width: 100%"/>
+                            </div>
+                            <div class = "col">
+                                <label>
+                                    City
+                                </label>
+                                <input type = "text" name = "city" style = "width: 100%"/>
+                            </div>
+                            <div class = "col">
+                                <label>
+                                    State
+                                </label>
+                                <input type = "text" name = "state" style = "width: 100%"/>
+                            </div>
+                            <div class = "col">
+                                <label>
+                                    Pin Code
+                                </label>
+                                <input type = "text" name = "pinCode" style = "width: 100%"/>
+                            </div>
+                        </div>
+                        </br>
+                        <div class = "px-5">
+                            <div>
+                                <button type = "submit" name = "submit" value = "Sign Up" class = "btn btn-primary" style = "width: 100%;">
+                                    Sign Up
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div>
-                <label>
-                    Last Name
-                </label>
-                <input type = "text" name = "lastName"/>
-            </div>
-            <div>
-                <label>
-                    Age
-                </label>
-                <input type = "text" name = "age"/>
-            </div>
-            <div>
-                <label>
-                    Street Name
-                </label>
-                <input type = "text" name = "streetName"/>
-            </div>
-            <div>
-                <label>
-                    Locality
-                </label>
-                <input type = "text" name = "locality"/>
-            </div>
-            <div>
-                <label>
-                    Sub-Locality
-                </label>
-                <input type = "text" name = "subLocality"/>
-            </div>
-            <div>
-                <label>
-                    City
-                </label>
-                <input type = "text" name = "city"/>
-            </div>
-            <div>
-                <label>
-                    State
-                </label>
-                <input type = "text" name = "state"/>
-            </div>
-            <div>
-                <label>
-                    Pin Code
-                </label>
-                <input type = "text" name = "pinCode"/>
-            </div>
-            <div>
-                <input type = "submit" name = "submit" value = "Sign Up"/>
-            </div>
-        </form>
+        </div>
     </body>
 </html>
