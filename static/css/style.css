@@ -1,4 +1,4 @@
-.btn-primary {
+/*.btn-primary {
     background-color: rgb(76, 160, 189);
     border-radius: 0.5rem;
 }
@@ -6,4 +6,19 @@
 .btn-primary:hover, .btn-primary:active, .btn-primary:focus, .btn-primary:disabled, 
 .btn-primary.active, .btn-primary:active:focus, .btn-primary:focus-visible {
     background-color: rgb(42, 116, 141);
+}*/
+
+/* Remove border and background for all tabs */
+.nav-tabs {
+    border: none;
+}
+
+.nav-tabs .nav-link {
+    border-radius: 5px;
+    margin: 1px;
+    box-shadow: 0 0 5px rgb(25, 28, 31);
+}
+
+.nav-tabs .nav-link.active {
+    background-color: rgb(11, 94, 215);
 }

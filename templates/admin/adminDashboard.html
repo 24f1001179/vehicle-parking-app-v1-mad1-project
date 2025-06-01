@@ -13,10 +13,11 @@
     <body class = "h-100">
         <div class = "container-fluid bg-body-tertiary min-vh-100">
             <div class = "container-fluid d-flex justify-content-center bg-body">
-                <div class = "container-fluid mt-2 rounded-4 container-fluid border d-flex align-items-center justify-content-center overflow-auto position-fixed border-primary" style = "height: 100px; width: 98%; background-color: rgba(33, 37, 41, 0.9); z-index: 1000;">
+                <div class = "container-fluid mt-2 rounded-4 container-fluid d-flex align-items-center justify-content-center overflow-auto position-fixed" style = "height: 100px; width: 98%; background-color: rgba(33, 37, 41, 0.9); z-index: 1000; box-shadow: 0 0 10px rgb(24, 26, 29);">
                     <a href = "/" class = "text-decoration-none text-reset me-2">
                         <h3>
                             ParkEase
+                            <img src = "/static\images\car-front-fill.svg" alt = "Logo" style = "width: 40px;"/>
                         </h3>
                     </a>
                     <ul class = "nav nav-tabs">
@@ -48,22 +49,22 @@
                     </ul>
                 </div>
             </div>
-            <div class = "rounded-3 container-fluid bg-body p-2 overflow-auto" style = "height: 80%; width: 100%; margin-top: 120px;">
+            <div class = "rounded-3 container-fluid bg-body p-2 overflow-auto" style = "height: 80%; width: 100%; margin-top: 120px; box-shadow: 0 0 10px rgb(24, 26, 29);">
                 <div class = "d-flex justify-content-center align-items-center gap-2" style = "height: 60px;">
                     <h3>
                         Parking Lots 
                     </h3>
                     <p>
                         <form method = "POST" action = "/admin/dashboard" class = "d-flex">
-                            <button type = "submit" name = "action" value = "create" class = "btn btn-primary btn-sm" style = "height: 40px; width: 150px;">
-                                Add A Parking Lot
+                            <button type = "submit" name = "action" value = "create" class = "btn btn-primary btn-sm d-flex align-items-center justify-content-center" style = "height: 40px; width: 100px;">
+                                <img src = "\static\images\plus-square-fill.svg" alt = "Add A Parking Lot" style = "width: 30%;"/>
                             </button>
                         </form>
                         <form method = "POST" action = "/admin/dashboard/searchResults" class = "d-flex">
                             <input type = "hidden" name = "type" value = "ParkingLot"/>
                             <input type = "text" name = "searchValue" class = "form-control" style = "height: 40px;"/> &nbsp;
-                            <button type = "submit" name = "action" value = "search" class = "btn btn-primary btn-sm" style = "height: 40px;">
-                                Search
+                            <button type = "submit" name = "action" value = "search" class = "btn btn-primary btn-sm d-flex justify-content-center align-items-center" style = "height: 40px;">
+                                <img src = "\static\images\search.svg" alt = "Search"/>
                             </button>
                         </form>
                     </p>
@@ -72,7 +73,7 @@
                     <div class = "row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 row-cols-xxl-6">
                         {% for parkingLot in parkingLots %}
                             <div class = "col p-1">
-                                <div class = "card p-1 border-primary">
+                                <div class = "card p-1" style = "box-shadow: 0 0 10px rgb(7, 8, 8); border: none">
                                     <form method = "POST" action = "/admin/dashboard" style = "height: 100%; width: 100%;">
                                         <div class = "card-body">
                                             <h5 class = "card-title text-center border-bottom">
@@ -80,32 +81,32 @@
                                             </h5>
                                             <input type = "hidden" name = "parkingLotId" value = "{{ parkingLot.id }}"/>
                                             <div class = "container-fluid d-flex align-items-center justify-content-center gap-1">
-                                                <button type = "submit" name = "action" value = "edit" class = "btn btn-primary btn-sm" style = "width: 100%;">
-                                                    Edit 
+                                                <button type = "submit" name = "action" value = "edit" class = "btn btn-warning btn-sm d-flex justify-content-center align-items-center" style = "width: 100%;">
+                                                    <img src = "\static\images\pencil-square.svg" alt = "Edit"/>
                                                 </button>
-                                                <button type = "submit" name = "action" value = "delete" class = "btn btn-primary btn-sm" style = "width: 100%;">
-                                                    Delete 
+                                                <button type = "submit" name = "action" value = "delete" class = "btn btn-danger btn-sm d-flex justify-content-center align-items-center" style = "width: 100%;">
+                                                    <img src = "\static\images\trash3-fill.svg" alt = "Delete"/>
                                                 </button>
-                                                <button type = "submit" name = "action" value = "details" class = "btn btn-primary btn-sm" style = "width: 100%;">
-                                                    Details
+                                                <button type = "submit" name = "action" value = "details" class = "btn btn-info btn-sm d-flex justify-content-center align-items-center" style = "width: 100%;">
+                                                    <img src = "\static\images\info-square-fill.svg" alt = "Details"/>
                                                 </button>
                                             </div>
-                                            <p class = "card-text text-center">
+                                            <div class = "card-text text-center">
                                                 {{ parkingLot.parkingSpots | selectattr("status", "equalto", 0) | list | count }} / {{ parkingLot.noOfParkingSpots }} Spots Available
-                                                </br>
-                                                <button type = "submit" name = "action" value = "add1" class = "btn btn-primary btn-sm">
-                                                    +1
-                                                </button>
-                                                <button type = "submit" name = "action" value = "delete1" class = "btn btn-primary btn-sm">
-                                                    -1
-                                                </button>
-                                                </br>
+                                                <div class = "container-fluid d-flex align-items-center justify-content-center gap-1">
+                                                    <button type = "submit" name = "action" value = "delete1" class = "btn btn-secondary btn-sm d-flex align-items-center justify-content-center">
+                                                        <img src = "\static\images\dash.svg" alt = "-1"/>
+                                                    </button>
+                                                    <button type = "submit" name = "action" value = "add1" class = "btn btn-secondary btn-sm d-flex align-items-center justify-content-center">
+                                                        <img src = "\static\images\plus.svg" alt = "+1"/>
+                                                    </button>
+                                                </div>
                                                 {{ parkingLot.pricePerHr }} Rs Per Hr
                                                 </br>
                                                 Landmark: {{ parkingLot.landmark }}
                                                 </br>
                                                 Address: {{ parkingLot.address | title }}
-                                            </p>
+                                            </div>
                                         </div>
                                     </form>
                                 </div>

@@ -60,6 +60,12 @@ def searchResults() :
         j = i.__str__()
         if searchValue in j :
             newRecs.append(j[0])
+    if type == "ReservedParkingSpot" :
+        for i in db.session.execute(db.select(User)).scalars().all() :
+            j = i.__str__()
+            if searchValue in j :
+                for k in i.reservedParkingSpots :
+                    newRecs.append(k.__str__()[0])    
     searchResult = db.session.execute(db.select(model).filter(model.id.in_(newRecs))).scalars().all()
     if type == "ParkingLot" :
         return render_template("admin/adminDashboard.html", parkingLots = searchResult)

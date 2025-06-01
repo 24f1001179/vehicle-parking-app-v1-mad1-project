@@ -13,10 +13,11 @@
     <body class = "h-100">
         <div class = "container-fluid bg-body-tertiary min-vh-100">
             <div class = "container-fluid d-flex justify-content-center bg-body">
-                <div class = "container-fluid mt-2 rounded-4 container-fluid border d-flex align-items-center justify-content-center overflow-auto position-fixed" style = "height: 100px; width: 98%; background-color: rgba(33, 37, 41, 0.9); z-index: 1000;">
+                <div class = "container-fluid mt-2 rounded-4 container-fluid d-flex align-items-center justify-content-center overflow-auto position-fixed" style = "height: 100px; width: 98%; background-color: rgba(33, 37, 41, 0.9); z-index: 1000; box-shadow: 0 0 10px rgb(24, 26, 29);">
                     <a href = "/" class = "text-decoration-none text-reset me-2">
                         <h3>
                             ParkEase
+                            <img src = "/static\images\car-front-fill.svg" alt = "Logo" style = "width: 40px;"/>
                         </h3>
                     </a>
                     <ul class = "nav nav-tabs">
@@ -53,50 +54,139 @@
                     </ul>
                 </div>
             </div>
-            <div class = "rounded-3 container-fluid bg-body p-2 overflow-auto text-center" style = "height: 80%; width: 100%; margin-top: 120px;">
-                <div class = "d-flex justify-content-center align-items-center gap-2" style = "height: 60px;">
+            <div class = "rounded-3 container-fluid bg-body p-2 overflow-auto" style = "height: 80%; width: 100%; margin-top: 120px; box-shadow: 0 0 10px rgb(24, 26, 29);">
+                <div class = "d-flex justify-content-center align-items-center" style = "height: 60px;">
                     <h3>
                         Reserved Parking Spot
                     </h3>
                 </div>
                 <div>
                     {% if reservedParkingSpot is not none %}
-                        <form method = "POST" action = "/user/dashboard/reserved" style = "height: 100%; width: 100%;">
+                        <form method = "POST" action = "/user/dashboard/reserved" style = "height: 100%; width: 99%;">
+                            <div class = "row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-2 row-cols-xl-3 row-cols-xxl-3 px-5">
+                                <div class = "col">
+                                    <label>
+                                        Landmark
+                                    </label>
+                                    <input type = "text" name = "la" value = "{{ reservedParkingSpot.parkingSpot.parkingLot.landmark }}" class = "form-control" style = "width: 100%" readonly/>
+                                </div>
+                                <div class = "col"> 
+                                    <label>
+                                        No. Of Parking Spots
+                                    </label>
+                                    <input type = "text" name = "nps" value = "{{ reservedParkingSpot.parkingSpot.parkingLot.noOfParkingSpots }}" class = "form-control" style = "width: 100%" readonly/>
+                                </div>
+                                <div class = "col">
+                                    <label>
+                                        Price Per Hour
+                                    </label>
+                                    <input type = "text" name = "pph" value = "{{ reservedParkingSpot.parkingSpot.parkingLot.pricePerHr }}" class = "form-control" style = "width: 100%" readonly/>
+                                </div>
+                            </div>
+                            </br>   
+                            <h5 class = "px-5">
+                                Address
+                            </h5>
+                            <div class = "row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 row-cols-xl-2 row-cols-xxl-2 px-5">
+                                <div class = "col">
+                                    <label>
+                                        Street Name
+                                    </label>
+                                    <input type = "text" name = "n" value = "{{ reservedParkingSpot.parkingSpot.parkingLot.address.streetName }}" class = "form-control" style = "width: 100%" readonly/>
+                                </div>
+                                <div class = "col">
+                                    <label>
+                                        Locality
+                                    </label>
+                                    <input type = "text" name = "l" value = "{{ reservedParkingSpot.parkingSpot.parkingLot.address.locality }}" class = "form-control" style = "width: 100%" readonly/>
+                                </div>
+                            </div>
+                            <div class = "row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-4 px-5">
+                                <div class = "col">
+                                    <label>
+                                        Sub-Locality
+                                    </label>
+                                    <input type = "text" name = "sl" value = "{{ reservedParkingSpot.parkingSpot.parkingLot.address.subLocality }}" class = "form-control" style = "width: 100%" readonly/>
+                                </div>
+                                <div class = "col">
+                                    <label>
+                                        City
+                                    </label>
+                                    <input type = "text" name = "c" value = "{{ reservedParkingSpot.parkingSpot.parkingLot.address.city }}" class = "form-control" style = "width: 100%" readonly/>
+                                </div>
+                                <div class = "col">
+                                    <label>
+                                        State
+                                    </label>
+                                    <input type = "text" name = "s" value = "{{ reservedParkingSpot.parkingSpot.parkingLot.address.state }}" class = "form-control" style = "width: 100%" readonly/>
+                                </div>
+                                <div class = "col">
+                                    <label>
+                                        Pin Code
+                                    </label>
+                                    <input type = "text" name = "p" value = "{{ reservedParkingSpot.parkingSpot.parkingLot.address.pinCode }}" class = "form-control" style = "width: 100%" readonly/>
+                                </div>
+                            </div>
+                            </br>
+                            <div class = "row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 row-cols-xl-2 row-cols-xxl-2 px-5">
+                                <div class = "col text-center">
+                                    <label>
+                                        No Of Vacant Parking Spots {{ reservedParkingSpot.parkingSpot.parkingLot.parkingSpots | selectattr("status", "equalto", 0) | list | count }}
+                                    </label>
+                                </div>
+                                <div class = "col text-center">
+                                    <label>
+                                        No Of Occupied Parking Spots {{ reservedParkingSpot.parkingSpot.parkingLot.noOfParkingSpots }}
+                                    </label>
+                                </div>
+                            </div>
+                            </br>
                             <input type = "hidden" name = "reservedParkingSpotId" value = "{{ reservedParkingSpot.id }}"/>
                             {% if reservedParkingSpot.parkingSpot.status %}
-                                <p>
-                                    Parking Timestamp: {{ reservedParkingSpot.parkingTimestamp }}
-                                </p>
+                                <div class = "row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 row-cols-xl-2 row-cols-xxl-2 px-5">
+                                    <div class = "col text-center">
+                                        <label>
+                                            Parking Date: {{ reservedParkingSpot.parkingTimestamp.strftime("%b %d, %Y") }}
+                                        </label>
+                                    </div>
+                                    <div class = "col text-center">
+                                        <label>
+                                            Parking Time: {{ reservedParkingSpot.parkingTimestamp.strftime("%I:%M %p") }}
+                                        </label>
+                                    </div>
+                                </div>
+                                </br>
                                 <h5>
-                                    Occupied
-                                    <button type = "submit" name = "action" value = "vaccate" class = "btn btn-primary btn-sm">
-                                        Vaccate
-                                    </button>
+                                    <div class = "row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 row-cols-xl-2 row-cols-xxl-2 px-5">
+                                        <div class = "col text-center">
+                                            Current Status: OCCUPIED
+                                        </div>
+                                        <div class = "col">
+                                            <button type = "submit" name = "action" value = "vaccate" class = "btn btn-warning" style = "width: 100%;">
+                                                Vaccate
+                                            </button>
+                                        </div>
+                                    </div>
                                 </h5>
                             {% else %}
-                                <h5>
-                                    Vaccant
-                                    <button type = "submit"name = "action" value = "occupy" class = "btn btn-primary btn-sm">
-                                        Occupy
-                                    </button>
-                                    <button type = "submit"name = "action" value = "release" class = "btn btn-primary btn-sm">
-                                        Release
-                                    </button>
+                                <h4>
+                                    <div class = "row">
+                                        <div class = "col text-center">
+                                            Current Status: VACCANT
+                                        </div>
+                                        <div class = "col">
+                                            <button type = "submit"name = "action" value = "occupy" class = "btn btn-success" style = "width: 100%;">
+                                                Occupy
+                                            </button>
+                                        </div>
+                                        <div class = "col">
+                                            <button type = "submit"name = "action" value = "release" class = "btn btn-danger btn" style = "width: 100%;">
+                                                Release
+                                            </button>
+                                        </div>
+                                    </div>
                                 </h5>
                             {% endif %}
-                            <p>
-                                Total Spots: {{ reservedParkingSpot.parkingSpot.parkingLot.noOfParkingSpots }} 
-                                </br>
-                                Available Spots: {{ reservedParkingSpot.parkingSpot.parkingLot.parkingSpots | selectattr("status", "equalto", 0) | list | count }}
-                                </br>
-                                Price Per Hr: {{ reservedParkingSpot.parkingSpot.parkingLot.pricePerHr }}
-                                </br>
-                                Landmark: {{ reservedParkingSpot.parkingSpot.parkingLot.landmark }}
-                                </br>
-                                Address: {{ reservedParkingSpot.parkingSpot.parkingLot.address | title }}
-                                </br>
-                                Vehicle No: {{ reservedParkingSpot.vehicleNumber }}
-                            </p>
                         </form>
                     {% else %}
                         <div>

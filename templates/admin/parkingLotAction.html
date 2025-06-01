@@ -13,10 +13,11 @@
     <body class = "h-100">
         <div class = "container-fluid bg-body-tertiary min-vh-100">
             <div class = "container-fluid d-flex justify-content-center bg-body">
-                <div class = "container-fluid mt-2 rounded-4 container-fluid border d-flex align-items-center justify-content-center overflow-auto position-fixed" style = "height: 100px; width: 98%; background-color: rgba(33, 37, 41, 0.9); z-index: 1000;">
+                <div class = "container-fluid mt-2 rounded-4 container-fluid d-flex align-items-center justify-content-center overflow-auto position-fixed" style = "height: 100px; width: 98%; background-color: rgba(33, 37, 41, 0.9); z-index: 1000; box-shadow: 0 0 10px rgb(24, 26, 29);">
                     <a href = "/" class = "text-decoration-none text-reset me-2">
                         <h3>
                             ParkEase
+                            <img src = "/static\images\car-front-fill.svg" alt = "Logo" style = "width: 40px;"/>
                         </h3>
                     </a>
                     <ul class = "nav nav-tabs">
@@ -47,7 +48,7 @@
                     </ul>
                 </div>
             </div>
-            <div class = "rounded-3 container-fluid bg-body p-2 overflow-auto" style = "height: 80%; width: 100%; margin-top: 120px;">
+            <div class = "rounded-3 container-fluid bg-body p-2 overflow-auto" style = "height: 80%; width: 100%; margin-top: 120px; box-shadow: 0 0 10px rgb(24, 26, 29);">
                 <div class = "container-fluid d-flex justify-content-center align-items-center gap-2" style = "height: 60px;">
                     <h3>
                         Parking Lot Details
@@ -60,19 +61,19 @@
                                 <label>
                                     Landmark
                                 </label>
-                                <input type = "text" name = "la" value = "{{ pl.landmark }}" style = "width: 100%" {% if action == "details" %} readonly {% endif %}/>
+                                <input type = "text" name = "la" value = "{{ pl.landmark }}" class = "form-control" style = "width: 100%" {% if action == "details" %} readonly {% endif %}/>
                             </div>
                             <div class = "col"> 
                                 <label>
                                     No. Of Parking Spots
                                 </label>
-                                <input type = "text" name = "nps" value = "{{ pl.noOfParkingSpots }}" style = "width: 100%" {% if action == "details" %} readonly {% endif %}/>
+                                <input type = "text" name = "nps" value = "{{ pl.noOfParkingSpots }}" class = "form-control" style = "width: 100%" {% if action == "details" %} readonly {% endif %}/>
                             </div>
                             <div class = "col">
                                 <label>
                                     Price Per Hour
                                 </label>
-                                <input type = "text" name = "pph" value = "{{ pl.pricePerHr }}" style = "width: 100%" {% if action == "details" %} readonly {% endif %}/>
+                                <input type = "text" name = "pph" value = "{{ pl.pricePerHr }}" class = "form-control" style = "width: 100%" {% if action == "details" %} readonly {% endif %}/>
                             </div>
                         </div>
                         </br>   
@@ -84,13 +85,13 @@
                                 <label>
                                     Street Name
                                 </label>
-                                <input type = "text" name = "n" value = "{{ pl.address.streetName }}" style = "width: 100%" {% if action == "details" %} readonly {% endif %}/>
+                                <input type = "text" name = "n" value = "{{ pl.address.streetName }}" class = "form-control" style = "width: 100%" {% if action == "details" %} readonly {% endif %}/>
                             </div>
                             <div class = "col">
                                 <label>
                                     Locality
                                 </label>
-                                <input type = "text" name = "l" value = "{{ pl.address.locality }}" style = "width: 100%" {% if action == "details" %} readonly {% endif %}/>
+                                <input type = "text" name = "l" value = "{{ pl.address.locality }}" class = "form-control" style = "width: 100%" {% if action == "details" %} readonly {% endif %}/>
                             </div>
                         </div>
                         <div class = "row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-4 px-5">
@@ -98,25 +99,25 @@
                                 <label>
                                     Sub-Locality
                                 </label>
-                                <input type = "text" name = "sl" value = "{{ pl.address.subLocality }}" style = "width: 100%" {% if action == "details" %} readonly {% endif %}/>
+                                <input type = "text" name = "sl" value = "{{ pl.address.subLocality }}" class = "form-control" style = "width: 100%" {% if action == "details" %} readonly {% endif %}/>
                             </div>
                             <div class = "col">
                                 <label>
                                     City
                                 </label>
-                                <input type = "text" name = "c" value = "{{ pl.address.city }}" style = "width: 100%" {% if action == "details" %} readonly {% endif %}/>
+                                <input type = "text" name = "c" value = "{{ pl.address.city }}" class = "form-control" style = "width: 100%" {% if action == "details" %} readonly {% endif %}/>
                             </div>
                             <div class = "col">
                                 <label>
                                     State
                                 </label>
-                                <input type = "text" name = "s" value = "{{ pl.address.state }}" style = "width: 100%" {% if action == "details" %} readonly {% endif %}/>
+                                <input type = "text" name = "s" value = "{{ pl.address.state }}" class = "form-control" style = "width: 100%" {% if action == "details" %} readonly {% endif %}/>
                             </div>
                             <div class = "col">
                                 <label>
                                     Pin Code
                                 </label>
-                                <input type = "text" name = "p" value = "{{ pl.address.pinCode }}" style = "width: 100%" {% if action == "details" %} readonly {% endif %}/>
+                                <input type = "text" name = "p" value = "{{ pl.address.pinCode }}" class = "form-control" style = "width: 100%" {% if action == "details" %} readonly {% endif %}/>
                             </div>
                         </div>
                         </br>

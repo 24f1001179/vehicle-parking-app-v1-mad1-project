@@ -24,4 +24,4 @@ if __name__ == "__main__" :
             admin = Admin(email = "24f1001179@ds.study.iitm.ac.in", password = "password")
             db.session.add(admin)
             db.session.commit()
-    app.run(debug = True)
+    app.run(host = "0.0.0.0", debug = True)
