@@ -6,6 +6,7 @@ from models.parkingInfo import ParkingLot, ParkingSpot, ReservedParkingSpot
 from models.userInfo import User, Address
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy import nulls_first, desc
+import matplotlib.pyplot as plt
 
 @adminbp.before_request
 def restrict() :
@@ -198,7 +199,52 @@ def history() :
     if request.method == "GET" :
         return render_template("admin/reservationHistory.html", reservedParkingSpots = viewHistory())
 
+def viewAllReservedParkingSpots() :
+    return db.session.execute(db.select(ReservedParkingSpot).order_by(nulls_first(desc(ReservedParkingSpot.parkingTimestamp)))).scalars().all()
+
+def getParkingLotsUsedByUsersLiUsingReservedParkingSpots() :
+    return [i.parkingSpot.parkingLot.id for i in db.session.execute(db.select(User)).scalars().first().reservedParkingSpots]
+
+def frequentlyUsedParkingLot() :
+    parkingLotIds = getParkingLotsUsedByUsersLiUsingReservedParkingSpots()
+    return getParkingLot(max(set(parkingLotIds), key = parkingLotIds.count))
+
+def sumOfTotalCosts() :
+    reservedParkingSpots = viewAllReservedParkingSpots()
+    sum = 0
+    for i in reservedParkingSpots :
+        if i.totalCost is not None:
+            sum += i.totalCost 
+    return sum
+
+def plotPiePlotOfParkingLotsUsed() :
+    plt.figure()
+    li = getParkingLotsUsedByUsersLiUsingReservedParkingSpots()
+    labels = sorted(set(li))
+    countLi = [li.count(i) for i in labels]
+    plt.pie(countLi, labels = [("Lot#" + str(i)) for i in labels], rotatelabels = True, labeldistance = 0.5)
+    plt.savefig("static/images/plot1.png")
+
+def plotLinePlotOfTotalCosts() :
+    plt.figure()
+    costLi = [i.totalCost for i in viewAllReservedParkingSpots()]
+    xAxis = [i for i in range(0, len(costLi))]
+    plt.plot(xAxis, costLi)
+    plt.xlabel("Parkings")
+    plt.ylabel("Total Costs")
+    plt.grid(True)
+    plt.savefig("static/images/plot2.png")
+
+def noOfOccupiedParkingSpotsRN() :
+    return len(db.session.execute(db.select(ParkingSpot).filter_by(status = True)).scalars().all())
+
+def totalNoOfType(type) :
+    model = globals()[type]
+    return len(db.session.execute(db.select(model)).scalars().all())
+
 @adminbp.route("/dashboard/summary", methods = ["GET"])
 def summary() :
     if request.method == "GET" :
-        return 
+        plotPiePlotOfParkingLotsUsed()
+        plotLinePlotOfTotalCosts()
+        return render_template("admin/summary.html", parkingLot = frequentlyUsedParkingLot(), cost = sumOfTotalCosts(), noOfParkings = totalNoOfType("ReservedParkingSpot"), noOfOccupiedParkingSpotsRN = noOfOccupiedParkingSpotsRN(), noOfParkingLots = totalNoOfType("ParkingLot"), noOfParkingSpots = totalNoOfType("ParkingSpot"))

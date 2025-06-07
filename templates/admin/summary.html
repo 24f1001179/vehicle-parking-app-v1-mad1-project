@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html class = "h-100" data-bs-theme = "dark">
+    <head>
+        <meta charset = "UTF-8"/>
+        <meta name = "Author" content = "J S Karthik"/>
+        <meta name = "Description" content = "User Dashboard Page"/>
+        <title>
+            Dashboard
+        </title>
+        <link rel = "icon" href = "\static\images\car-front-fill.svg"/>
+        <link rel = "stylesheet" href = "/static/bootstrap/css/bootstrap.min.css"/>
+        <link rel = "stylesheet" href = "/static/css/style.css"/>
+    </head>
+    <body class = "h-100">
+        <div class = "container-fluid bg-body-tertiary min-vh-100">
+            <div class = "container-fluid d-flex justify-content-center bg-body">
+                <div class = "container-fluid mt-2 rounded-4 container-fluid d-flex align-items-center justify-content-center overflow-auto position-fixed" style = "height: 70px; width: 98%; background-color: rgba(33, 37, 41, 0.9); z-index: 1000; box-shadow: 0 0 10px rgb(24, 26, 29); backdrop-filter: blur(3px);">
+                    <a href = "/" class = "text-decoration-none text-reset me-2">
+                        <h3>
+                            ParkEase
+                            <img src = "/static\images\car-front-fill.svg" alt = "Logo" style = "width: 40px;"/>
+                        </h3>
+                    </a>
+                    <ul class = "nav nav-tabs">
+                        <li class = "nav-item">
+                            <a class = "nav-link" href = "/admin/dashboard">
+                                Parking Lots
+                            </a>
+                        </li>
+                        <li class = "nav-item">
+                            <a class = "nav-link", href = "/admin/dashboard/users">
+                                Users
+                            </a>
+                        </li>
+                        <li class = "nav-item">
+                            <a class = "nav-link", href = "/admin/dashboard/history">
+                                History
+                            </a>
+                        </li>
+                        <li class = "nav-item">
+                            <a class = "nav-link active" href = "/admin/dashboard/summary">
+                                Summary
+                            </a>
+                        </li>
+                        </li class = "nav-item">
+                            <a class = "nav-link" href = "/signIn">
+                                Logout
+                            </a>
+                        </li>
+                        <li class = "nav-item">
+                            <a class = "nav-link" href = "/">
+                                Website
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class = "rounded-3 container-fluid bg-body p-2 overflow-auto" style = "height: 80%; width: 100%; margin-top: 90px; box-shadow: 0 0 10px rgb(24, 26, 29);">
+                <div class = "d-flex justify-content-center align-items-center gap-2" style = "height: 60px;">
+                    <h3>
+                        Parking Summary
+                    </h3>
+                </div>
+                <div style = "height: 100%; width: 99%;">
+                    <div class = "row">
+                        <div class = "col"> 
+                            <div>
+                                <h5 class = "px-5">
+                                    Parking Lot Frequency Pie Chart
+                                </h5>
+                                <img src = "/static\images\plot1.png" class = "px-5" style = "width: 100%;"/>
+                            </div>
+                            </br>
+                            <div>
+                                <h5 class = "px-5">
+                                    Most Popular Parking Lot
+                                </h5>
+                                <div class = "px-5">
+                                    <div class = "card p-1" style = "box-shadow: 0 0 10px rgb(7, 8, 8); border: none">
+                                        <form method = "POST" action = "/admin/dashboard" style = "height: 100%; width: 100%;">
+                                            <div class = "card-body">
+                                                <h5 class = "card-title text-center border-bottom">
+                                                    Lot #{{ parkingLot.id }}
+                                                </h5>
+                                                <input type = "hidden" name = "parkingLotId" value = "{{ parkingLot.id }}"/>
+                                                <div class = "container-fluid d-flex align-items-center justify-content-center gap-1">
+                                                    <button type = "submit" name = "action" value = "edit" class = "btn btn-warning btn-sm d-flex justify-content-center align-items-center" style = "width: 100%;">
+                                                        <img src = "\static\images\pencil-square.svg" alt = "Edit"/>
+                                                    </button>
+                                                    <button type = "submit" name = "action" value = "delete" class = "btn btn-danger btn-sm d-flex justify-content-center align-items-center" style = "width: 100%;">
+                                                        <img src = "\static\images\trash3-fill.svg" alt = "Delete"/>
+                                                    </button>
+                                                    <button type = "submit" name = "action" value = "details" class = "btn btn-info btn-sm d-flex justify-content-center align-items-center" style = "width: 100%;">
+                                                        <img src = "\static\images\info-square-fill.svg" alt = "Details"/>
+                                                    </button>
+                                                </div>
+                                                <div class = "card-text text-center">
+                                                    {{ parkingLot.parkingSpots | selectattr("status", "equalto", 0) | list | count }} / {{ parkingLot.noOfParkingSpots }} Spots Available
+                                                    <div class = "container-fluid d-flex align-items-center justify-content-center gap-1">
+                                                        <button type = "submit" name = "action" value = "delete1" class = "btn btn-secondary btn-sm d-flex align-items-center justify-content-center">
+                                                            <img src = "\static\images\dash.svg" alt = "-1"/>
+                                                        </button>
+                                                        <button type = "submit" name = "action" value = "add1" class = "btn btn-secondary btn-sm d-flex align-items-center justify-content-center">
+                                                            <img src = "\static\images\plus.svg" alt = "+1"/>
+                                                        </button>
+                                                    </div>
+                                                    {{ parkingLot.pricePerHr }} Rs Per Hr
+                                                    </br>
+                                                    Landmark: {{ parkingLot.landmark }}
+                                                    </br>
+                                                    Address: {{ parkingLot.address | title }}
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class = "col">
+                            <div>
+                                <h5 class = "px-5">
+                                    Trend of Revenue Generated
+                                </h5>
+                                <img class = "px-5" src = "/static\images\plot2.png" style = "width: 100%;"/>
+                            </div>
+                            </br>
+                            <h5 class = "px-5">
+                                    <div class = "alert alert-dark">
+                                        <img src = "/static\images\arrow-right-short.svg" alt = "Logo" style = "width: 40px;"/>
+                                        Total Revenue Generated: {{ cost }}
+                                    </div>
+                                    <div class = "alert alert-dark">
+                                        <img src = "/static\images\arrow-right-short.svg" alt = "Logo" style = "width: 40px;"/>
+                                        Total No of Parkings: {{ noOfParkings }}
+                                    </div>
+                                    <div class = "alert alert-dark">
+                                        <img src = "/static\images\arrow-right-short.svg" alt = "Logo" style = "width: 40px;"/>
+                                        No of Occupied Parking Spots Right Now: {{ noOfOccupiedParkingSpotsRN }}
+                                    </div>
+                                    <div class = "alert alert-dark">
+                                        <img src = "/static\images\arrow-right-short.svg" alt = "Logo" style = "width: 40px;"/>
+                                        Total No Of Parking Lots: {{ noOfParkingLots }}
+                                    </div>
+                                    <div class = "alert alert-dark">
+                                        <img src = "/static\images\arrow-right-short.svg" alt = "Logo" style = "width: 40px;"/>
+                                        Total No Of Parking Spots: {{ noOfParkingSpots }}
+                                    </div>
+                                </ul>
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
