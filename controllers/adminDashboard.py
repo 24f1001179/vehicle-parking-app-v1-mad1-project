@@ -5,6 +5,7 @@ from controllers.bp import adminbp
 from models.parkingInfo import ParkingLot, ParkingSpot, ReservedParkingSpot
 from models.userInfo import User, Address
 from sqlalchemy.exc import IntegrityError
+from sqlalchemy import nulls_first, desc
 
 @adminbp.before_request
 def restrict() :
@@ -59,7 +60,7 @@ def searchResults() :
     for i in db.session.execute(db.select(model)).scalars().all() :
         j = i.__str__()
         if searchValue in j :
-            newRecs.append(j[0])
+            newRecs.append(j.split(" ")[0])
     if type == "ReservedParkingSpot" :
         for i in db.session.execute(db.select(User)).scalars().all() :
             j = i.__str__()
@@ -74,6 +75,7 @@ def searchResults() :
     elif type == "ReservedParkingSpot" :
         return render_template("admin/reservationHistory.html", reservedParkingSpots = searchResult)
     return 
+
 @adminbp.route("/dashboard/action", methods = ["GET", "POST"])
 def parkingLotAction() :
     id = session.get("id")
@@ -183,7 +185,7 @@ def viewUsers() :
     return db.session.execute(db.select(User)).scalars().all()
 
 def viewHistory() :
-    return db.session.execute(db.select(ReservedParkingSpot)).scalars().all()
+    return db.session.execute(db.select(ReservedParkingSpot).order_by(nulls_first(desc(ReservedParkingSpot.parkingTimestamp)))).scalars().all()
 
 @adminbp.route("/dashboard/users", methods = ["GET"])
 def users() :
@@ -195,3 +197,8 @@ def users() :
 def history() :
     if request.method == "GET" :
         return render_template("admin/reservationHistory.html", reservedParkingSpots = viewHistory())
+
+@adminbp.route("/dashboard/summary", methods = ["GET"])
+def summary() :
+    if request.method == "GET" :
+        return 

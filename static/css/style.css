@@ -17,6 +17,7 @@
     border-radius: 5px;
     margin: 1px;
     box-shadow: 0 0 5px rgb(25, 28, 31);
+    backdrop-filter: blur(1px);
 }
 
 .nav-tabs .nav-link.active {

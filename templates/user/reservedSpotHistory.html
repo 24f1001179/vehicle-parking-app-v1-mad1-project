@@ -7,13 +7,14 @@
         <title>
             Dashboard
         </title>
+        <link rel = "icon" href = "\static\images\car-front-fill.svg"/>
         <link rel = "stylesheet" href = "/static/bootstrap/css/bootstrap.min.css"/>
         <link rel = "stylesheet" href = "/static/css/style.css"/>
     </head>
     <body class = "h-100">
         <div class = "container-fluid bg-body-tertiary min-vh-100">
             <div class = "container-fluid d-flex justify-content-center bg-body">
-                <div class = "container-fluid mt-2 rounded-4 container-fluid d-flex align-items-center justify-content-center overflow-auto position-fixed" style = "height: 100px; width: 98%; background-color: rgba(33, 37, 41, 0.9); z-index: 1000; box-shadow: 0 0 10px rgb(24, 26, 29);">
+                <div class = "container-fluid mt-2 rounded-4 container-fluid d-flex align-items-center justify-content-center overflow-auto position-fixed" style = "height: 70px; width: 98%; background-color: rgba(33, 37, 41, 0.9); z-index: 1000; box-shadow: 0 0 10px rgb(24, 26, 29); backdrop-filter: blur(3px);">
                     <a href = "/" class = "text-decoration-none text-reset me-2">
                         <h3>
                             ParkEase
@@ -54,17 +55,27 @@
                     </ul>
                 </div>
             </div>
-            <div class = "rounded-3 container-fluid bg-body p-2 overflow-auto" style = "height: 80%; width: 100%; margin-top: 120px; box-shadow: 0 0 10px rgb(24, 26, 29);">
+            <div class = "rounded-3 container-fluid bg-body p-2 overflow-auto" style = "height: 80%; width: 100%; margin-top: 90px; box-shadow: 0 0 10px rgb(24, 26, 29);">
                 <div class = "d-flex justify-content-center align-items-center gap-2" style = "height: 60px;">
                     <h3>
                         Parking History
                     </h3>
+                    <p>
+                        <form method = "POST" action = "/user/dashboard/searchResults" class = "d-flex">
+                            <input type = "hidden" name = "type" value = "ReservedParkingSpot"/>
+                            <input type = "text" name = "searchValue" class = "form-control" style = "height: 40px;"/> &nbsp;
+                            <button type = "submit" name = "action" value = "search" class = "btn btn-primary btn-sm d-flex justify-content-center align-items-center" style = "height: 40px;">
+                                <img src = "\static\images\search.svg" alt = "Search"/>
+                            </button>
+                        </form>
+                    </p>
                 </div>
                 <div>
+                    <form action = "/user/dashboard/searchResults" method = "POST">
                     <table class = "table table-striped table-bordered table-hover text-center" style = "box-shadow: 0 0 10px rgb(7, 8, 8)">
                         <thead class = "border-secondary">
                             <tr>
-                                <th>
+                                <th class = "bg-info">
                                     Date
                                 </th>
                                 <th>
@@ -73,37 +84,84 @@
                                 <th>
                                     Leaving Time
                                 </th>
-                                <th>
+                                <th class = "bg-info">
                                     Duration
                                 </th>
-                                <th>
+                                <th class = "bg-info">
                                     Cost
+                                </th>
+                                <th>
+                                    Status
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
                             {% for reservedParkingSpot in reservedParkingSpots %}
                                 <tr>
-                                    <td>
-                                        {{ reservedParkingSpot.parkingTimestamp.strftime("%b %d, %Y") }}
-                                    </td>
-                                    <td>
-                                        {{ reservedParkingSpot.parkingTimestamp.strftime("%I:%M %p") }}
-                                    </td>
-                                    <td>
-                                        {{ reservedParkingSpot.leavingTimestamp.strftime("%I:%M %p") }}
-                                    </td>
-                                    <td>
-                                        {% set dur = (reservedParkingSpot.leavingTimestamp - reservedParkingSpot.parkingTimestamp).total_seconds() | int %}
-                                        {{ "%02d" | format(dur // 3600) }}:{{ "%02d" | format((dur % 3600) // 60) }}:{{ "%02d" | format(dur % 60) }}
-                                    </td>
-                                    <td>
-                                        {{ reservedParkingSpot.totalCost }}
-                                    </td>
+                                    {% if reservedParkingSpot.parkingTimestamp is none %}
+                                        {% set a = 1 %}
+                                        <td class = "bg-secondary">
+                                            -
+                                        </td>
+                                        <td>
+                                            -
+                                        </td>
+                                    {% else %}
+                                        <td class = "bg-secondary">
+                                            {{ reservedParkingSpot.parkingTimestamp.strftime("%b %d, %Y") }}
+                                        </td>
+                                        <td>
+                                            {{ reservedParkingSpot.parkingTimestamp.strftime("%I:%M %p") }}
+                                        </td>
+                                    {% endif %}
+                                    {% if reservedParkingSpot.leavingTimestamp is none %}
+                                        {% set b = 1 %}
+                                        <td>
+                                            -
+                                        </td>
+                                        <td class = "bg-secondary">
+                                            -
+                                        </td>
+                                        <td class = "bg-secondary">
+                                            -
+                                        </td>
+                                    {% else %}
+                                        <td>
+                                            {{ reservedParkingSpot.leavingTimestamp.strftime("%I:%M %p") }}
+                                        </td>
+                                        <td class = "bg-secondary">
+                                            {% set dur = (reservedParkingSpot.leavingTimestamp - reservedParkingSpot.parkingTimestamp).total_seconds() | int %}
+                                            {{ "%02d" | format(dur // 3600) }}:{{ "%02d" | format((dur % 3600) // 60) }}:{{ "%02d" | format(dur % 60) }}
+                                        </td>
+                                        <td class = "bg-secondary">
+                                            {{ reservedParkingSpot.totalCost }}
+                                        </td>
+                                    {% endif %}
+                                    {% if a == 1 %}
+                                        <td>
+                                            <a class = "btn btn-outline-danger btn-sm" href = "/user/dashboard/reserved">
+                                                Reserved
+                                            </a>
+                                        </td>
+                                    {% elif b == 1 %} 
+                                        <td>
+                                            <a class = "btn btn-outline-success btn-sm" href = "/user/dashboard/reserved">
+                                                Occupied
+                                            </a>
+                                        </td>
+                                    {% else %}
+                                        <td>
+                                            <input type = "hidden" name = "type" value = "ParkingLot"/>
+                                            <button type = "submit" class = "btn btn-outline-warning btn-sm" name = "searchValue" value = "{{reservedParkingSpot.parkingSpot.parkingLot.address}}">
+                                                Parked Out
+                                            </button>
+                                        </td>
+                                    {% endif %}
                                 </tr>
                             {% endfor %}
                         </tbody>
                     </table>
+                    </form>
                 </div>
             </div>
         </div>
