@@ -4,6 +4,7 @@
         <meta charset = "UTF-8"/>
         <meta name = "Author" content = "J S Karthik"/>
         <meta name = "Description" content = "Display All Users Page"/>
+        <meta name = "viewport" content = "width = device-width, initial-scale = 1.0"/>
         <title>
             Users
         </title>
@@ -14,45 +15,47 @@
     <body class = "h-100">
         <div class = "container-fluid bg-body-tertiary min-vh-100">
             <div class = "container-fluid d-flex justify-content-center bg-body">
-                <div class = "container-fluid mt-2 rounded-4 container-fluid d-flex align-items-center justify-content-center overflow-auto position-fixed" style = "height: 70px; width: 98%; background-color: rgba(33, 37, 41, 0.9); z-index: 1000; box-shadow: 0 0 10px rgb(24, 26, 29); backdrop-filter: blur(3px);">
-                    <a href = "/" class = "text-decoration-none text-reset me-2">
-                        <h3>
-                            ParkEase
-                            <img src = "/static\images\car-front-fill.svg" alt = "Logo" style = "width: 40px;"/>
-                        </h3>
-                    </a>
-                    <ul class = "nav nav-tabs">
-                        <li class = "nav-item">
-                            <a class = "nav-link" href = "/admin/dashboard">
-                                Parking Lots
+                <div class = "d-flex justify-content-center align-items-center container-fluid mt-2 rounded-4 position-fixed" style = "height: 70px; width: 98%; background-color: rgba(33, 37, 41, 0.9); z-index: 1000; box-shadow: 0 0 10px rgb(0, 0, 0); backdrop-filter: blur(3px);">
+                    <div class = "overflow-auto" style = "height: 100%; width: 100%;">
+                        <ul class = "nav nav-tabs d-flex align-items-center justify-content-center" style = "height: 100%; width: 100%;">
+                            <a href = "/" class = "text-decoration-none text-reset me-2">
+                                <h3>
+                                    ParkEase
+                                    <img src = "/static\images\car-front-fill.svg" alt = "Logo" style = "width: 40px;"/>
+                                </h3>
                             </a>
-                        </li>
-                        <li class = "nav-item">
-                            <a class = "nav-link active", href = "/admin/dashboard/users">
-                                Users
-                            </a>
-                        </li>
-                        <li class = "nav-item">
-                            <a class = "nav-link", href = "/admin/dashboard/history">
-                                History
-                            </a>
-                        </li>
-                        <li class = "nav-item">
-                            <a class = "nav-link" href = "/admin/dashboard/summary">
-                                Summary
-                            </a>
-                        </li>
-                        </li class = "nav-item">
-                            <a class = "nav-link" href = "/signIn">
-                                Logout
-                            </a>
-                        </li>
-                        <li class = "nav-item">
-                            <a class = "nav-link" href = "/">
-                                Website
-                            </a>
-                        </li>
-                    </ul>
+                            <li class = "nav-item">
+                                <a class = "nav-link" href = "/admin/dashboard">
+                                    Parking Lots
+                                </a>
+                            </li>
+                            <li class = "nav-item">
+                                <a class = "nav-link active", href = "/admin/dashboard/users">
+                                    Users
+                                </a>
+                            </li>
+                            <li class = "nav-item">
+                                <a class = "nav-link", href = "/admin/dashboard/history">
+                                    History
+                                </a>
+                            </li>
+                            <li class = "nav-item">
+                                <a class = "nav-link" href = "/admin/dashboard/summary">
+                                    Summary
+                                </a>
+                            </li>
+                            </li class = "nav-item">
+                                <a class = "nav-link" href = "/signIn">
+                                    Logout
+                                </a>
+                            </li>
+                            <li class = "nav-item">
+                                <a class = "nav-link" href = "/">
+                                    Website
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
             <div class = "rounded-3 container-fluid bg-body p-2 overflow-auto" style = "height: 80%; width: 100%; margin-top: 90px; box-shadow: 0 0 10px rgb(24, 26, 29);">

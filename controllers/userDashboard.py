@@ -104,7 +104,7 @@ def currentReservedParkingSpot() :
     return db.session.execute(db.select(ReservedParkingSpot).filter_by(userId = session["id"], totalCost = None)).scalars().first()
 
 def getParkingLotsUsedByAUserLiUsingReservedParkingSpots() :
-    return [i.parkingSpot.parkingLot.id for i in db.session.execute(db.select(User).filter_by(id = session["id"])).scalars().first().reservedParkingSpots]
+    return [i.parkingSpot.parkingLot.id for i in db.session.execute(db.select(User).filter_by(id = session["id"])).scalars().first().reservedParkingSpots if i.parkingSpot is not None]
 
 def frequentlyUsedParkingLot() :
     parkingLotIds = getParkingLotsUsedByAUserLiUsingReservedParkingSpots()

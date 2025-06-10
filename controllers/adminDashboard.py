@@ -203,7 +203,7 @@ def viewAllReservedParkingSpots() :
     return db.session.execute(db.select(ReservedParkingSpot).order_by(nulls_first(desc(ReservedParkingSpot.parkingTimestamp)))).scalars().all()
 
 def getParkingLotsUsedByUsersLiUsingReservedParkingSpots() :
-    return [i.parkingSpot.parkingLot.id for i in db.session.execute(db.select(User)).scalars().first().reservedParkingSpots]
+    return [i.parkingSpot.parkingLot.id for i in db.session.execute(db.select(User)).scalars().first().reservedParkingSpots if i.parkingSpot is not None]
 
 def frequentlyUsedParkingLot() :
     parkingLotIds = getParkingLotsUsedByUsersLiUsingReservedParkingSpots()

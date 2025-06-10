@@ -4,6 +4,7 @@
         <meta charset = "UTF-8"/>
         <meta name = "Author" content = "J S Karthik"/>
         <meta name = "Description" content = "Landing Page"/>
+        <meta name = "viewport" content = "width = device-width, initial-scale = 1.0"/>
         <title>
             Home
         </title>
@@ -14,48 +15,109 @@
     <body class = "h-100">
         <div class = "container-fluid bg-body-tertiary min-vh-100">
             <div class = "container-fluid d-flex justify-content-center bg-body">
-                <div class = "container-fluid mt-2 rounded-4 container-fluid d-flex align-items-center justify-content-center overflow-auto position-fixed" style = "height: 90px; width: 98%; background-color: rgba(33, 37, 41, 0.8); z-index: 1000; box-shadow: 0 0 10px rgb(24, 26, 29);">
-                    <a href = "/" class = "text-decoration-none text-reset me-2">
-                        <h3>
-                            ParkEase
-                            <img src = "/static\images\car-front-fill.svg" alt = "Logo" style = "width: 40px;"/>
-                        </h3>
-                    </a>
-                    <ul class = "nav nav-tabs">
-                        <li class = "nav-item">
-                            <a class = "nav-link active" href = "/">
-                                Home
+                <div class = "d-flex justify-content-center align-items-center container-fluid mt-2 rounded-4 position-fixed" style = "height: 70px; width: 98%; background-color: rgba(33, 37, 41, 0.9); z-index: 1000; box-shadow: 0 0 10px rgb(0, 0, 0); backdrop-filter: blur(3px);">
+                    <div class = "overflow-auto" style = "height: 100%; width: 100%;">
+                        <ul class = "nav nav-tabs d-flex align-items-center justify-content-center" style = "height: 100%; width: 100%;">
+                            <a href = "/" class = "text-decoration-none text-reset me-2">
+                                <h3>
+                                    ParkEase
+                                    <img src = "/static\images\car-front-fill.svg" alt = "Logo" style = "width: 40px;"/>
+                                </h3>
                             </a>
-                        </li>
-                        <li class = "nav-item">
-                            <a class = "nav-link", href = "/signIn">
-                                Sign In
-                            </a>
-                        </li>
-                        <li class = "nav-item">
-                            <a class = "nav-link", href = "/signUp">
-                                Sign Up
-                            </a>
-                        </li>
-                        <li class = "nav-item">
-                            <a class = "nav-link" href = "/user/dashboard">
-                                Dashboard
-                            </a>
-                        </li>
-                    </ul>
+                            <li class = "nav-item">
+                                <a class = "nav-link active" href = "/">
+                                    Home
+                                </a>
+                            </li>
+                            <li class = "nav-item">
+                                <a class = "nav-link", href = "/signIn">
+                                    Sign In
+                                </a>
+                            </li>
+                            <li class = "nav-item">
+                                <a class = "nav-link", href = "/signUp">
+                                    Sign Up
+                                </a>
+                            </li>
+                            <li class = "nav-item">
+                                <a class = "nav-link" href = "/user/dashboard">
+                                    Dashboard
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-            <div class = "rounded-3 container-fluid bg-body p-2 overflow-fixed" style = "height: 80%; width: 100%; margin-top: 110px; box-shadow: 0 0 10px rgb(24, 26, 29);">
+            <div class = "rounded-3 container-fluid bg-body p-2 overflow-fixed" style = "height: 80%; width: 100%; margin-top: 90px; box-shadow: 0 0 10px rgb(24, 26, 29);">
                 <div class = "text-center">
                     <h1>
                         ParkEase
                     </h1>
                 </div>
-                <div class = "text-end">
+                <div class = "text-center">
                     <h3>
-                        Find. Park. Relax. With ParkEase.
+                        Search. Reserve. Relax. With ParkEase.
                     </h3> 
                 </div>
+                </br>
+                <div style = "width: 100%;">
+                    <h5 class = "text-center">
+                        Highlights Of ParkEase
+                    </h5>
+                    <p class = "px-1 px-sm-1 px-md-2 px-lg-3 px-xl-4 px-xxl-5">
+                        <div class = "row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 row-cols-xl-2 row-cols-xxl-2">
+                            {% for i in di %}
+                                <div class = "col px-5">
+                                    <div class = "alert alert-dark" style = "width: 100%; box-shadow: 0 0 10px rgb(7, 8, 8); border: none;">
+                                        <img src = "/static\images\arrow-right-short.svg" alt = "Logo" style = "width: 40px;"/>
+                                        {{ di[i] }}+ {{ i }}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </p>
+                    <h5 class = "text-center">
+                        Why Use ParkEase?
+                    </h5>
+                    <div class = "row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 row-cols-xxl-5">
+                        {% for i in d %}
+                            <div class = "col p-2">
+                                <div class = "card p-1" style = "box-shadow: 0 0 10px rgb(7, 8, 8); border: none;">
+                                    <img src = "/static\images\{{d[i][1]}}.svg" alt = "Logo" class = "px-5 py-1"/>
+                                    <div class = "card-body">
+                                        <h5 class = "card-title">
+                                            {{ i }}
+                                        </h5>
+                                        <p class = "card-text">
+                                            {{ d[i][0] }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                </br>
+                <div class = "d-flex justify-content-center" style = "width: 100%;">
+                    <div class = "row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-2 row-cols-xl-3 row-cols-xxl-3 d-flex align-items-center justify-content-center" style = "width: 75%">
+                        <div class = "col">
+                            <h3 class = "text-center">
+                                Getting Started
+                            </h3>
+                        </div>
+                        <div class = "col">
+                            <a href = "./signIn" class = "btn btn-primary d-flex align-items-center justify-content-center form-control text-decoration-none text-reset px-5">
+                                Sign In
+                            </a>
+                        </div>
+                        <div class = "col">
+                            <a href = "./signUp" class = "btn btn-primary d-flex align-items-center justify-content-center form-control text-decoration-none text-reset px-5">
+                                Sign Up
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                </br>
             </div>
         </div>
     </body>
