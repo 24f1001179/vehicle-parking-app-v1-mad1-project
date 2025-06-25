@@ -1,11 +1,17 @@
 from flask import Flask
 from dbInit import db
+from flask_restful import Api
+from flask_cors import CORS
 
 app = Flask(__name__, template_folder = "templates")
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
 app.config["SECRET_KEY"] = "7b802e16987d92cb41311357a106ff83a65b79e60d0942c91a2b9950477acdc8" #secret key for sessions
 
 db.init_app(app)
+
+api = Api(app)
+
+CORS(app)
 
 from models.userInfo import User, Address, Admin
 from models.parkingInfo import ParkingLot, ParkingSpot, ReservedParkingSpot
@@ -16,6 +22,11 @@ import controllers.login
 app.register_blueprint(userbp, url_prefix = "/user")
 app.register_blueprint(adminbp, url_prefix = "/admin")
 app.register_blueprint(generalbp, url_prefix = "/")
+
+from api import UserApi, ParkingLotApi
+
+api.add_resource(UserApi, "/api/users/<string:firstName>")
+api.add_resource(ParkingLotApi, "/api/parkinglots/<string:city>")
 
 if __name__ == "__main__" :
     with app.app_context() :

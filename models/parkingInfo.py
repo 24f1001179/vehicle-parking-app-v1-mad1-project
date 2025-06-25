@@ -7,7 +7,7 @@ class ParkingLot(db.Model) :
     noOfParkingSpots = db.Column(db.Integer)
     pricePerHr = db.Column(db.Integer)
     addressId = db.Column(db.Integer, db.ForeignKey("address.id"))
-    address = db.relationship("Address", uselist = False, backref = "parkingLot")
+    address = db.relationship("Address", uselist = False, backref = "parkingLot") #parking lot and address is 1 - 1
     parkingSpots = db.relationship("ParkingSpot", backref = "parkingLot") #parking lot and parking spot is 1 - M
     def __str__(self) :
         return "{} {} {} {} {}".format(self.id, self.landmark.lower(), self.noOfParkingSpots, self.pricePerHr, self.address.__str__())

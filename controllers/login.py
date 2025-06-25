@@ -97,6 +97,6 @@ def floorTens(i) :
 
 @generalbp.route("/", methods = ["GET"])
 def landingPage() :
-    d = {"Skip The Queue" : ["Reserve Your Spot In Advance And Be Ensured Guaranteed Availability When You Arrive.", "check2-all"], "Flexibile Cancellations" : ["Change Of Plans? Easily Cancel Your Reservation At Any Time Free Of Cost.", "trash2"], "Seamless Payments" : ["Automatic Cost Computation Enabling Faster Payments Without Having To Wait In Lines.", "paypal"], "Track History" : ["Effortlessly Acces Your Complete List Of Reservations And Past Parking Sessions.", "clock-history"], "Insightful Summary" : ["Make Smarter Parking Choices Using Summary Charts.", "bar-chart-fill"]}
+    d = {"Skip The Queue" : ["Reserve Your Spot In Advance And Be Ensured Guaranteed Availability When You Arrive.", "check2-all"], "Flexibile Cancellations" : ["Change Of Plans? Easily Cancel Your Reservation At Any Time Free Of Cost.", "trash2"], "Seamless Payments" : ["Automatic Cost Computation Enabling Faster Payments Without Having To Wait In Lines.", "cash-stack"], "Track History" : ["Effortlessly Acces Your Complete List Of Reservations And Past Parking Sessions.", "clock-history"], "Insightful Summary" : ["Make Smarter Parking Choices Using Summary Charts.", "bar-chart-fill"]}
     di = {"Parking Lots" : floorTens(totalNoOfType("ParkingLot")), "Parking Spots" : floorTens(totalNoOfType("ParkingSpot")), "Parkings" : floorTens(totalNoOfType("ReservedParkingSpot")), "Revenue Generated" : floorTens(sumOfTotalCosts())}
     return render_template("general/landingPage.html", d = d, di = di)
