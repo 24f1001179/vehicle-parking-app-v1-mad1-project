@@ -31,3 +31,28 @@ class Admin(db.Model) :
     id = db.Column(db.Integer, primary_key = True, server_default = "1")
     email = db.Column(db.String)
     password = db.Column(db.String)
+
+'''
+User 
+User and Address is M – 1
+User and Reserved Parking Spot is 1 - M
+•	Id (Primary Key) (Auto Increment) (Integer)
+•	firstName (String)
+•	lastName (String)
+•	age (Integer)
+•	addressId (Foreign Key) (Integer)
+•	email (Unique) (String)
+•	password (Unique) (String)
+Address
+•	id (Primary Key) (Auto Increment) (Integer)
+•	streetName(String)
+•	locality (String)
+•	subLocality (String)
+•	city (String)
+•	state (String)
+•	pinCode (String)
+Admin
+•	id (Primary Key) (Default (“1”)) (Integer)
+•	email (String)
+•	password (String)
+'''

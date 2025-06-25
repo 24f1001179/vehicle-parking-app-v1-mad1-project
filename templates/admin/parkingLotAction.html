@@ -15,7 +15,7 @@
     <body class = "h-100">
         <div class = "container-fluid bg-body-tertiary min-vh-100">
             <div class = "container-fluid d-flex justify-content-center bg-body">
-                <div class = "d-flex justify-content-center align-items-center container-fluid mt-2 rounded-4 position-fixed" style = "height: 70px; width: 98%; background-color: rgba(33, 37, 41, 0.9); z-index: 1000; box-shadow: 0 0 10px rgb(0, 0, 0); backdrop-filter: blur(3px);">
+                <div class = "d-flex justify-content-center align-items-center container-fluid mt-2 rounded-4 position-fixed height" style = "background-color: rgba(33, 37, 41, 0.9); z-index: 1000; box-shadow: 0 0 10px rgb(0, 0, 0); backdrop-filter: blur(3px);">
                     <div class = "overflow-auto" style = "height: 100%; width: 100%;">
                         <ul class = "nav nav-tabs d-flex align-items-center justify-content-center" style = "height: 100%; width: 100%;">
                             <a href = "/" class = "text-decoration-none text-reset me-2">
@@ -58,7 +58,7 @@
                     </div>
                 </div>
             </div>
-            <div class = "rounded-3 container-fluid bg-body p-2 overflow-auto" style = "height: 80%; width: 100%; margin-top: 90px; box-shadow: 0 0 10px rgb(24, 26, 29);">
+            <div class = "rounded-3 container-fluid bg-body p-2 overflow-auto margin-top" style = "height: 80%; width: 100%; box-shadow: 0 0 10px rgb(24, 26, 29);">
                 <div class = "container-fluid d-flex justify-content-center align-items-center gap-2" style = "height: 60px;">
                     <h3>
                         Parking Lot Details
@@ -86,7 +86,7 @@
                                 <input type = "text" name = "pph" value = "{{ pl.pricePerHr }}" class = "form-control" style = "width: 100%" {% if action == "details" %} readonly {% endif %}/>
                             </div>
                         </div>
-                        </br>   
+                        <br/>   
                         <h5 class = "px-5">
                             Address
                         </h5>
@@ -130,7 +130,7 @@
                                 <input type = "text" name = "p" value = "{{ pl.address.pinCode }}" class = "form-control" style = "width: 100%" {% if action == "details" %} readonly {% endif %}/>
                             </div>
                         </div>
-                        </br>
+                        <br/>
                         <div class = "row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 row-cols-xl-2 row-cols-xxl-2 px-5">
                             <div class = "col">
                                 <label>
@@ -143,13 +143,13 @@
                                 </label>
                             </div>
                         </div>
-                        </br>
+                        <br/>
                         <div class = "px-5">
                             <button type = "submit" class = "btn btn-success" style = "width: 100%;">
                                 {% if action == 'details' %} Back {% else %} Submit {% endif %}
                             </button>
                         </div>
-                        </br>
+                        <br/>
                     </form>
                 </div>
             </div>

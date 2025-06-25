@@ -31,3 +31,27 @@ class ReservedParkingSpot(db.Model) :
     vehicleNumber = db.Column(db.String)
     def __str__(self) :
         return "{} {} {} {} {}".format(self.id, self.parkingTimestamp, self.leavingTimestamp, self.totalCost, self.vehicleNumber)
+    
+'''
+ParkingLot
+Parking Lot and Address is 1 – 1
+Parking Lot and Parking Spot is 1 - M
+•	id (Primary Key) (Auto Increment) (Integer)
+•	landmark (String)
+•	noOfParkingSpots (Integer)
+•	pricePerHr (Integer)
+•	addressId (Foreign Key) (Integer)
+ParkingSpot
+Parking Spot and Reserved Parking Spot is 1 - M
+•	id (Primary Key) (Auto Increment) (Integer)
+•	parkingLotId (Foreign Key) (Integer)
+•	status (Boolean)
+ReservedParkingSpot
+•	id (Primary Key) (Auto Increment) (Integer)
+•	parkingSpotId (Foreign Key) (Integer)
+•	userId (Foreign Key) (Integer)
+•	parkingTimestamp (DateTime)
+•	leavingTimestamp (DateTime)
+•	totalCost (Integer)
+•	vehicleNumber (String)
+'''

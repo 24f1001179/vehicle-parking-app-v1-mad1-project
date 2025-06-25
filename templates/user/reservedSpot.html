@@ -15,7 +15,7 @@
     <body class = "h-100">
         <div class = "container-fluid bg-body-tertiary min-vh-100">
             <div class = "container-fluid d-flex justify-content-center bg-body">
-                <div class = "d-flex justify-content-center align-items-center container-fluid mt-2 rounded-4 position-fixed" style = "height: 70px; width: 98%; background-color: rgba(33, 37, 41, 0.9); z-index: 1000; box-shadow: 0 0 10px rgb(0, 0, 0); backdrop-filter: blur(3px);">
+                <div class = "d-flex justify-content-center align-items-center container-fluid mt-2 rounded-4 position-fixed height" style = "background-color: rgba(33, 37, 41, 0.9); z-index: 1000; box-shadow: 0 0 10px rgb(0, 0, 0); backdrop-filter: blur(3px);">
                     <div class = "overflow-auto" style = "height: 100%; width: 100%;">
                         <ul class = "nav nav-tabs d-flex align-items-center justify-content-center" style = "height: 100%; width: 100%;">
                             <a href = "/" class = "text-decoration-none text-reset me-2">
@@ -58,7 +58,7 @@
                     </div>
                 </div>
             </div>
-            <div class = "rounded-3 container-fluid bg-body p-2 overflow-auto py-4 py-sm-4 py-md-2 py-lg-1 py-xl-1 py-xxl-1" style = "height: auto; width: 100%; margin-top: 90px; box-shadow: 0 0 10px rgb(24, 26, 29);">
+            <div class = "rounded-3 container-fluid bg-body p-2 overflow-auto py-4 py-sm-4 py-md-2 py-lg-1 py-xl-1 py-xxl-1 margin-top" style = "height: auto; width: 100%; box-shadow: 0 0 10px rgb(24, 26, 29);">
                 <div class = "d-flex justify-content-center align-items-center" style = "height: 60px;">
                     <h3>
                         Reserved Parking Spot
@@ -87,7 +87,7 @@
                                     <input type = "text" name = "pph" value = "{{ reservedParkingSpot.parkingSpot.parkingLot.pricePerHr }}" class = "form-control" style = "width: 100%" readonly/>
                                 </div>
                             </div>
-                            </br>   
+                            <br/>   
                             <h5 class = "px-5">
                                 Address
                             </h5>
@@ -131,7 +131,7 @@
                                     <input type = "text" name = "p" value = "{{ reservedParkingSpot.parkingSpot.parkingLot.address.pinCode }}" class = "form-control" style = "width: 100%" readonly/>
                                 </div>
                             </div>
-                            </br>
+                            <br/>
                             <div class = "row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 row-cols-xl-2 row-cols-xxl-2 px-5">
                                 <div class = "col text-center">
                                     <label>
@@ -144,7 +144,7 @@
                                     </label>
                                 </div>
                             </div>
-                            </br>
+                            <br/>
                             <input type = "hidden" name = "reservedParkingSpotId" value = "{{ reservedParkingSpot.id }}"/>
                             {% if reservedParkingSpot.parkingSpot.status %}
                                 <div class = "row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 row-cols-xl-2 row-cols-xxl-2 px-5">
@@ -159,7 +159,7 @@
                                         </label>
                                     </div>
                                 </div>
-                                </br>
+                                <br/>
                                 <h5>
                                     <div class = "row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 row-cols-xl-2 row-cols-xxl-2 px-5">
                                         <div class = "col text-center">
