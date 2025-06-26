@@ -80,14 +80,22 @@ def additionalDetails() :
 def createUser(address, user) :
     try :
         db.session.add(address)
+        print('hi')
         db.session.flush() #creates the autoincrement id but does not commit
+        print('hi')
         user.address = address
+        print('hi')
         db.session.add(user)
+        print('hi')
         db.session.commit()
+        print('hi')
         session["id"] = user.id
+        print('hi')
         session["type"] = "user"
+        print('hi')
         return True
     except IntegrityError as e :
+        print("helo")
         db.session.rollback() #roll back if some error occurs and commit is not done
         return False
 
